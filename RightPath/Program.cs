@@ -22,6 +22,8 @@ namespace RightPath
 
             var app = builder.Build();
 
+            AppDbInitializator.Seed(app);
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

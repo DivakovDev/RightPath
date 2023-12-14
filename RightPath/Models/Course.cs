@@ -2,10 +2,10 @@
 
 namespace RightPath.Models
 {
-    public class Courses
+    public class Course
     {
         [Key]
-        public int CourseId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public  string CourseTitle { get; set; }
@@ -17,9 +17,15 @@ namespace RightPath.Models
         public double CourseDuration { get; set; }
 
         [Required]
+        public string CourseLogo { get; set; }
+
+        [Required]
         public string Lecture1 { get; set; }
 
         public string Lecture2 { get; set; }
+
+        //Relation
+        public List<Course_Lector> Courses_Lectures { get; set; }
 
     }
 }
