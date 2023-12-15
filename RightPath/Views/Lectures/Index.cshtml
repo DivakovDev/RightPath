@@ -1,0 +1,56 @@
+﻿@using RightPath.Models.NewModelView
+@model IEnumerable<RightPath.Models.Lecture>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="create-link" asp-action="Create">Create New</a>
+</p>
+
+<table class="table styled-table">
+    <thead>
+        <tr class="table-header">
+            <th>
+                @Html.DisplayNameFor(model => model.ProfileImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LectureName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LectureDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-row">
+                <td>
+                    <img class="rounded-circle" src="~/Images/@item.ProfileImage" alt="Profile Image" />
+                </td>
+                <td>
+                    <span class="lecture-name">@Html.DisplayFor(modelItem => item.LectureName)</span>
+                </td>
+                <td>
+                    <span class="last-name">@Html.DisplayFor(modelItem => item.LastName)</span>
+                </td>
+                <td>
+                    <span class="lecture-description">@Html.DisplayFor(modelItem => item.LectureDescription)</span>
+                </td>
+                <td class="action-links">
+                    <a class="edit-link" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="details-link" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="delete-link" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
