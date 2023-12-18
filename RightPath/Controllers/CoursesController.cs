@@ -75,7 +75,7 @@ namespace RightPath.Controllers
 
                 };
 
-                _context.Add(course);
+                _context.Add(course1);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

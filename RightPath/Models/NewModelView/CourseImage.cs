@@ -7,10 +7,6 @@ namespace RightPath.Models.NewModelView
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Course Logo")]
-        [Required(ErrorMessage = "Course Logo is required")]
-        public IFormFile CourseLogo { get; set; }
-
         [Display(Name = "Name")]
         [Required(ErrorMessage = "Name is required")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
@@ -24,6 +20,10 @@ namespace RightPath.Models.NewModelView
         [Display(Name = "Duration")]
         [Required(ErrorMessage = "Duration is required and must be real hours!")]
         public double CourseDuration { get; set; }
+
+        [Display(Name = "Course Logo")]
+        [Required(ErrorMessage = "Course Logo is required")]
+        public IFormFile CourseLogo { get; set; }
 
         [Display(Name = "Lecture1")]
         [Required(ErrorMessage = "Lecture1 is required")]

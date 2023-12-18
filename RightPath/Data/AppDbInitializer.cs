@@ -1,4 +1,5 @@
 ﻿using RightPath.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Data
 {
@@ -41,7 +42,36 @@ namespace RightPath.Data
                     });
 
                     context.SaveChanges();
+                }
 
+                if (!context.Courses.Any())
+                {
+
+                    context.Courses.AddRange(new List<Course>()
+                        {
+                            new Course()
+                            {
+                                CourseTitle = "Full Stack Developer Course",
+                                CourseDescription= "You will learn how to be full stack developer from the basics!",
+                                CourseDuration = 12.30,
+                                CourseLogo = "lecture1.png",
+                                Lecture1 = "Yuli Farhson",
+                                Lecture2 = "Yuli Robertson",
+
+                            },
+                            new Course()
+                            {
+                                CourseTitle = "Back End Developer Course",
+                                CourseDescription= "You will learn how to be back end developer from the basics!",
+                                CourseDuration = 11.30,
+                                CourseLogo = "lecture1.png",
+                                Lecture1 = "Duncun Harfkak",
+                                Lecture2 = "Joe Hudson",
+
+                            },
+                        });
+
+                    context.SaveChanges();
                 }
             }
         }
