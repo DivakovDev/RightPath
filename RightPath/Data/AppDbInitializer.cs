@@ -73,6 +73,40 @@ namespace RightPath.Data
 
                     context.SaveChanges();
                 }
+
+                if (!context.Webminars.Any())
+                {
+
+                    context.Webminars.AddRange(new List<Webminar>()
+                        {
+                            new Webminar()
+                            {
+                                Title = "Sofia Streets WebMinnar",
+                                WebminarDescription = "You will learn about sofia underground",
+                                StartDate = new DateTime(2023, 12, 24),
+                                EndDate = new DateTime(2023, 12, 25), 
+                                WebminarLocation = "Sofia",
+                                WebminarLogo = "lecture1.png",
+                                Lecture1 = "Harry Maguire",
+                                Lecture2 = "Jonny Sins"
+
+                            },
+                            new Webminar()
+                            {
+                                Title = "NoWebminar",
+                                WebminarDescription = "You will learn about how to invest",
+                                StartDate = new DateTime(2023, 12, 20),
+                                EndDate = new DateTime(2023, 12, 21),
+                                WebminarLocation = "Sofia, Marinaela hotel",
+                                WebminarLogo = "lecture1.png",
+                                Lecture1 = "Harry Maguire",
+                                Lecture2 = "Jonny Sins"
+
+                            },
+                        });
+
+                    context.SaveChanges();
+                }
             }
         }
     }
