@@ -1,18 +1,18 @@
 ﻿@using RightPath.Models.NewModelView
 @model IEnumerable<RightPath.Models.Course>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="row pt-4 pb-3">
+    <div class="col-6">
+        <h1 class="text-primary">Courses List</h1>
+    </div>
+    <div class="col-6 text-end">
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </div>
+</div>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-row">
             <th>
                 @Html.DisplayNameFor(model => model.CourseLogo)
             </th>
@@ -24,7 +24,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CourseDuration)
-            </th
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Lecture1)
             </th>
@@ -35,32 +35,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <img class="rounded-circle" src="~/Images/@item.CourseLogo" alt="Course Logo" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseDuration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lecture1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lecture2)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img class="rounded-circle" src="~/Images/@item.CourseLogo" alt="Course Logo" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lecture1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lecture2)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -20,7 +20,6 @@ html {
 body {
   margin-bottom: 60px;
 }
-
 /*Lecture page css*/
 /* General Styles for the Page */
 h1 {
@@ -92,10 +91,8 @@ h1 {
     vertical-align: middle;
 }
 
-    .action-links a:hover {
-        background-color: #0056b3;
-        color: white;
-        text-decoration: none;
-    }
-
-In th
+.action-links a:hover {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+}
