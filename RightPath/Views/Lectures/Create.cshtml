@@ -8,26 +8,24 @@
 
 <h5>Lecture</h5>
 <hr />
-<div class="row justify-content-center">
-    <div class="col-12">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group py-1">
                 <label asp-for="LectureName" class="control-label"></label>
                 <input asp-for="LectureName" class="form-control" />
                 <span asp-validation-for="LectureName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group py-1">
                 <label asp-for="LastName" class="control-label"></label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group py-1">
                 <label asp-for="LectureDescription" class="control-label"></label>
                 <input asp-for="LectureDescription" class="form-control" />
                 <span asp-validation-for="LectureDescription" class="text-danger"></span>
             </div>
-            <div class="form-group row">
+            <div class="form-group row py-1">
                 <label asp-for="ProfileImage" class="control-label mb-1"></label>
                 <input asp-for="ProfileImage" id="customFile" />
                 <span asp-validation-for="ProfileImage" class="text-danger"></span>

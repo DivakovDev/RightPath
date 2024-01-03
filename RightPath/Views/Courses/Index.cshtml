@@ -5,66 +5,42 @@
     ViewData["Title"] = "Courses";
 }
 
-<div class="row pt-4 pb-3">
-    <div class="col-6">
-        <h1 class="text-primary">Courses List</h1>
+<div class="container pt-4 pb-3">
+    <div class="row mb-3">
+        <div class="col-12">
+            <h1 class="text-primary">Courses List</h1>
+        </div>
+        <div class="col-12 text-end">
+            <a class="btn btn-primary" asp-action="Create">
+                <i class="bi bi-plus-circle"></i> Create New
+            </a>
+        </div>
     </div>
-    <div class="col-6 text-end">
-        <a class="btn btn-primary" asp-action="Create">Create New</a>
-    </div>
-</div>
 
-<table class="table">
-    <thead>
-        <tr class="table-row">
-            <th>
-                @Html.DisplayNameFor(model => model.CourseLogo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseDuration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lecture1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lecture2)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="row">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    <img class="rounded-circle" src="~/Images/@item.CourseLogo" alt="Course Logo" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseDuration)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lecture1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lecture2)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card mb-10 mt-4">
+                    <div class="p-3">
+                        <img class="card-img-top rounded-circle mx-auto d-block" src="~/Images/@item.CourseLogo" alt="Profile Image" style="width: 150px; height: 150px; object-fit: cover;" />
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.CourseTitle)</h5>
+                        <p class="card-text text-sm">@Html.DisplayFor(modelItem => item.CourseDescription)</p>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CourseDuration) hours duration</h6>
+                        <div>
+                            <p>@Html.DisplayFor(modelItem => item.Courses_Lectures)</p>
+                        </div>
+
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light btn-sm">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
