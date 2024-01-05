@@ -8,48 +8,52 @@
 
 <h4>Course</h4>
 <hr />
-<div class="row justify-content-center">
-    <div class="col-12">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group py-1">
-                <label asp-for="CourseTitle" class="control-label"></label>
-                <input asp-for="CourseTitle" class="form-control" />
-                <span asp-validation-for="CourseTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="CourseDescription" class="control-label"></label>
-                <input asp-for="CourseDescription" class="form-control" />
-                <span asp-validation-for="CourseDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="CourseDuration" class="control-label"></label>
-                <input asp-for="CourseDuration" class="form-control" />
-                <span asp-validation-for="CourseDuration" class="text-danger"></span>
-            </div>
+    <div class="row">
+    <div class="col-10 border-secondary border-2 p-3">
+            <form asp-action="Edit" enctypy="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group py-1">
+                    <label asp-for="CourseTitle" class="control-label"></label>
+                    <input asp-for="CourseTitle" class="form-control" />
+                    <span asp-validation-for="CourseTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="CourseDescription" class="control-label"></label>
+                    <input asp-for="CourseDescription" class="form-control" />
+                    <span asp-validation-for="CourseDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="CourseDuration" class="control-label"></label>
+                    <input asp-for="CourseDuration" class="form-control" />
+                    <span asp-validation-for="CourseDuration" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="Lecture1" class="control-label"></label>
+                    <input asp-for="Lecture1" class="form-control" />
+                    <span asp-validation-for="Lecture1" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="Lecture2" class="control-label"></label>
+                    <input asp-for="Lecture2" class="form-control" />
+                    <span asp-validation-for="Lecture2" class="text-danger"></span>
+                </div>
             <div class="form-group py-1">
                 <label asp-for="CourseLogo" class="control-label"></label>
-                <input asp-for="CourseLogo" class="form-control" />
+                <input type="file" asp-for="CourseLogo" class="form-control" />
                 <span asp-validation-for="CourseLogo" class="text-danger"></span>
             </div>
-            <div class="form-group py-1">
-                <label asp-for="Lecture1" class="control-label"></label>
-                <input asp-for="Lecture1" class="form-control" />
-                <span asp-validation-for="Lecture1" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="Lecture2" class="control-label"></label>
-                <input asp-for="Lecture2" class="form-control" />
-                <span asp-validation-for="Lecture2" class="text-danger"></span>
-            </div>
-            <div class="form-group mt-4">
-                <input type="submit" value="Save" class="btn btn-primary btn-md" />
-                <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
-            </div>
-        </form>
+                <div class="form-group mt-4">
+                    <input type="submit" value="Save" class="btn btn-primary btn-md" />
+                    <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
+                </div>
+            </form>
+        </div>
+    <div class="col-2">
+        <img id="courseLogo" src="~/Images/@Model.CourseLogo" width="100%" alt="LectureProfilePicture"
+             style="border-radius:5px; border:1px solid #bbb9b9;" />
     </div>
-</div>
+    </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

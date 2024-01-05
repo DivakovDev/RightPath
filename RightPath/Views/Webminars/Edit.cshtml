@@ -8,8 +8,8 @@
 
 <h4>Webminar</h4>
 <hr />
-<div class="row justify-content-center">
-    <div class="col-12">
+<div class="row">
+    <div class="col-10 border-secondary border-2 p-3">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -58,6 +58,12 @@
                 <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
             </div>
         </form>
+    </div>
+    <div class="col-2">
+        <div class="col-2">
+            <img id="webminarLogo" src="~/Images/@Model.WebminarLogo" width="100%" alt="LectureProfilePicture"
+                 style="border-radius:5px; border:1px solid #bbb9b9;" />
+        </div>
     </div>
 </div>
 
