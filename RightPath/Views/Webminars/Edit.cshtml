@@ -39,11 +39,6 @@
                 <span asp-validation-for="WebminarLocation" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="WebminarLogo" class="control-label"></label>
-                <input asp-for="WebminarLogo" class="form-control" />
-                <span asp-validation-for="WebminarLogo" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
                 <label asp-for="Lecture1" class="control-label"></label>
                 <input asp-for="Lecture1" class="form-control" />
                 <span asp-validation-for="Lecture1" class="text-danger"></span>
@@ -53,6 +48,11 @@
                 <input asp-for="Lecture2" class="form-control" />
                 <span asp-validation-for="Lecture2" class="text-danger"></span>
             </div>
+            <div class="form-group py-1">
+                <label asp-for="WebminarLogo" class="control-label"></label>
+                <input type="file" asp-for="WebminarLogo" class="form-control" />
+                <span asp-validation-for="WebminarLogo" class="text-danger"></span>
+            </div>
             <div class="form-group mt-4">
                 <input type="submit" value="Save" class="btn btn-primary btn-md" />
                 <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
@@ -60,10 +60,8 @@
         </form>
     </div>
     <div class="col-2">
-        <div class="col-2">
             <img id="webminarLogo" src="~/Images/@Model.WebminarLogo" width="100%" alt="LectureProfilePicture"
                  style="border-radius:5px; border:1px solid #bbb9b9;" />
-        </div>
     </div>
 </div>
 

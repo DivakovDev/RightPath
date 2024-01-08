@@ -141,22 +141,9 @@ namespace RightPath.Controllers
 
             if (!ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
                 try
                 {
-                    var lectureToUpdate = await _context.Lectures.FindAsync(id);
-                    if (lectureToUpdate == null)
-                    {
-                        return NotFound();
-                    }
-
-                    // Update properties
-                    lectureToUpdate.LectureName = lecture.LectureName;
-                    lectureToUpdate.LastName = lecture.LastName;
-                    lectureToUpdate.LectureDescription = lecture.LectureDescription;
-                    lectureToUpdate.ProfileImage = lecture.ProfileImage;
-
-                    _context.Update(lectureToUpdate);
+                    _context.Update(lecture);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
