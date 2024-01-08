@@ -80,7 +80,6 @@ namespace RightPath.Controllers
             return View(lecture);
         }
         private string UploadeFile(LectureImage lecture)
-
         {
 
             string uniqueFileName = null;
@@ -140,11 +139,24 @@ namespace RightPath.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
                 try
                 {
-                    _context.Update(lecture);
+                    var lectureToUpdate = await _context.Lectures.FindAsync(id);
+                    if (lectureToUpdate == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Update properties
+                    lectureToUpdate.LectureName = lecture.LectureName;
+                    lectureToUpdate.LastName = lecture.LastName;
+                    lectureToUpdate.LectureDescription = lecture.LectureDescription;
+                    lectureToUpdate.ProfileImage = lecture.ProfileImage;
+
+                    _context.Update(lectureToUpdate);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -162,6 +174,7 @@ namespace RightPath.Controllers
             }
             return View(lecture);
         }
+
 
         // GET: Lectures/Delete/5
         public async Task<IActionResult> Delete(int? id)
