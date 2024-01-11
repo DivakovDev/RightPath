@@ -73,7 +73,7 @@ namespace RightPath.Controllers
                 return NotFound();
             }
 
-            var city = await _context.Cities.FindAsync(id);
+            City city = _context.Cities.Find(id);
             if (city == null)
             {
                 return NotFound();
@@ -86,32 +86,14 @@ namespace RightPath.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DisplayOrder")] City city)
+        public async Task<IActionResult> Edit(City city)
         {
-            if (id != city.Id)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(city);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CityExists(city.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Cities.Update(city);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(city);
         }
@@ -139,19 +121,14 @@ namespace RightPath.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var city = await _context.Cities.FindAsync(id);
-            if (city != null)
+            City city = _context.Cities.Find(id);
+            if (city == null)
             {
-                _context.Cities.Remove(city);
+                return NotFound();
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CityExists(int id)
-        {
-            return _context.Cities.Any(e => e.Id == id);
+            _context.Cities.Remove(city);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

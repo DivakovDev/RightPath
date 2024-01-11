@@ -23,6 +23,8 @@ namespace RightPath.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+
+
         // GET: Webminars
         public async Task<IActionResult> Index()
         {
@@ -69,7 +71,7 @@ namespace RightPath.Controllers
                     WebminarDescription = webminar.WebminarDescription, 
                     StartDate = webminar.StartDate,
                     EndDate = webminar.EndDate,
-                    WebminarLocation = webminar.WebminarLocation,
+                    CityId = webminar.CityId,
                     WebminarLogo = uniqueFileName,
                     Lecture1 = webminar.Lecture1,
                     Lecture2 = webminar.Lecture2
@@ -136,7 +138,6 @@ namespace RightPath.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,WebminarDescription,StartDate,EndDate,WebminarLocation,WebminarLogo,Lecture1,Lecture2")] Webminar webminar)
         {
             if (id != webminar.Id)

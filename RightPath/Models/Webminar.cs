@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RightPath.Models
 {
@@ -27,10 +29,14 @@ namespace RightPath.Models
 
         [Required(ErrorMessage = "Локацията е задължителна!")]
         [DisplayName("Локация на Събитието")]
-        public string WebminarLocation { get; set; }
+        public int CityId { get; set; }
+        [ForeignKey("CityId")]
+        [ValidateNever]
+        public City City { get; set; }
 
         [Required(ErrorMessage = "Корицата е задължителна")]
         [DisplayName("Снимка на Уебминара")]
+        [ValidateNever]
         public string WebminarLogo{ get; set; }
 
         [Required(ErrorMessage = "Водещият Лектор е задължителен!")]

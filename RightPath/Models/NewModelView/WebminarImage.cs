@@ -28,7 +28,7 @@ namespace RightPath.Models.NewModelView
 
         [DisplayName("Локация на Уебминар")]
         [Required(ErrorMessage = "Локацията е задължителна!")]
-        public string WebminarLocation { get; set; }
+        public int CityId { get; set; }
 
         [Display(Name = "Корица на Уебминар")]
         [Required(ErrorMessage = "Корицата е задължителна")]
