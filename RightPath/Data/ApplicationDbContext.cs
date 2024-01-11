@@ -13,6 +13,8 @@ namespace RightPath.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+
             modelBuilder.Entity<Course_Lector>().HasKey(cl => new
             {
                 cl.CourseId,
@@ -41,7 +43,6 @@ namespace RightPath.Data
         public DbSet<Course_Lector> Courses_Lectures { get; set; }
         public DbSet<Webminar_Lector> Webminars_Lectures { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
-        //public DbSet<UsersInfo> UsersInfo{ get; set; }
         public DbSet<Webminar> Webminars{ get; set; }
 
     }

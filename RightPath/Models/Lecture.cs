@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Models
 {
@@ -7,16 +8,20 @@ namespace RightPath.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Името е задължително!")]
+        [DisplayName("Име на Лектор")]
         public string LectureName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Фамилното име е задължително!")]
+        [DisplayName("Фамилно име на Лектор")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Описанието е задължително!")]
+        [DisplayName("Описание на Лектор")]
         public string LectureDescription { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Профилната снимка е задължителна!")]
+        [DisplayName("Профилна Снимка")]
         public string ProfileImage { get; set; }
 
         //Realtion for Course

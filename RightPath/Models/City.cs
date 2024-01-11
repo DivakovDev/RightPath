@@ -1,13 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Models
 {
     public class City
     {
         [Key]
-        public int CityId { get; set; }
-
+        public int Id { get; set; }
         [Required]
-        public string CityName { get; set; }
+        [StringLength(30)]
+        [DisplayName("Име на Града")]
+        public string Name { get; set; }
+        [DisplayName("Покажи поръчката")]
+        [Range(0, 30)]
+        public int DisplayOrder { get; set; }
     }
 }

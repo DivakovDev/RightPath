@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Models.NewModelView
 {
@@ -8,38 +9,38 @@ namespace RightPath.Models.NewModelView
         public int Id { get; set; }
 
 
-        [Display(Name = "Title")]
-        [Required(ErrorMessage = "Title is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Title must be between 3 and 50 chars")]
+        [DisplayName("Име на Уебминара")]
+        [Required(ErrorMessage = "Името е задължително")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Името трябва да бъде 2 или повече символа!")]
         public string Title { get; set; }
 
-        [Display(Name = "Description")]
-        [Required(ErrorMessage = "Description is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
+        [DisplayName("Описание на Уебминара")]
+        [Required(ErrorMessage = "Описанието е задължително")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Описанието трябва да бъде 3 или повече символа!")]
         public string WebminarDescription { get; set; }
 
-        [Display(Name = "Start Date")]
-        [Required(ErrorMessage = "Start Date is required")]
+        [DisplayName("Начална Дата")]
+        [Required(ErrorMessage = "Началната дата е задължителна!")]
         public DateTime StartDate { get; set; }
 
+        [DisplayName("Крайна Дата")]
         public DateTime EndDate { get; set; }
 
-        [Display(Name = "Webminar Location")]
-        [Required(ErrorMessage = "Location is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Location must be between 3 and 50 chars")]
+        [DisplayName("Локация на Уебминар")]
+        [Required(ErrorMessage = "Локацията е задължителна!")]
         public string WebminarLocation { get; set; }
 
-        [Display(Name = "Webminar Logo")]
-        [Required(ErrorMessage = "Webminar Logo is required")]
+        [Display(Name = "Корица на Уебминар")]
+        [Required(ErrorMessage = "Корицата е задължителна")]
         public IFormFile WebminarLogo { get; set; }
 
 
-        [Display(Name = "Lecture1")]
-        [Required(ErrorMessage = "Lecture1 is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Lecture1 name must be between 3 and 50 chars")]
+        [DisplayName("Водещ Лектор")]
+        [Required(ErrorMessage = "Водещият Лектор е задължителен!")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Името на Водещия лектор трябва да е повече от 10 символа!")]
         public string Lecture1 { get; set; }
 
-        [Display(Name = "Lecture2")]
+        [DisplayName("Помощник Лектор")]
         public string Lecture2 { get; set; }
     }
 }

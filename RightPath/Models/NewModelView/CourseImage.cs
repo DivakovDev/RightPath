@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Models.NewModelView
 {
@@ -7,30 +8,30 @@ namespace RightPath.Models.NewModelView
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Name")]
-        [Required(ErrorMessage = "Name is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
+        [DisplayName("Име на Курса")]
+        [Required(ErrorMessage = "Името е задължително")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Името трябва да бъде до 50 символа!")]
         public string CourseTitle { get; set; }
 
-        [Display(Name = "Description")]
-        [Required(ErrorMessage = "Description is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Description must be between 3 and 50 chars")]
+        [DisplayName("Описание на Курса")]
+        [Required(ErrorMessage = "Описанието е задължително")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Описанието трябва да бъде повече от 3 символа!")]
         public string CourseDescription { get; set; }
 
-        [Display(Name = "Duration")]
-        [Required(ErrorMessage = "Duration is required and must be real hours!")]
+        [DisplayName("Времетраене")]
+        [Required(ErrorMessage = "Времетраенето задължително трябва да бъде в часове!")]
         public double CourseDuration { get; set; }
 
-        [Display(Name = "Course Logo")]
-        [Required(ErrorMessage = "Course Logo is required")]
+        [DisplayName("Корица на Курса")]
+        [Required(ErrorMessage = "Корицата е задължителна!")]
         public IFormFile CourseLogo { get; set; }
 
-        [Display(Name = "Lecture1")]
-        [Required(ErrorMessage = "Lecture1 is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Lecture1 name must be between 3 and 50 chars")]
+        [DisplayName("Водещ Лектор")]
+        [Required(ErrorMessage = "Водещия лектор е задължителен")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Името на Водещия лектор е задължително!")]
         public string Lecture1 { get; set; }
 
-        [Display(Name = "Lecture2")]
+        [Display(Name = "Помощник Лектор")]
         public string Lecture2 { get; set; }
     }
 }

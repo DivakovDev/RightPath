@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Models.NewModelView
 {
@@ -8,24 +9,24 @@ namespace RightPath.Models.NewModelView
         public int Id { get; set; }
 
 
-        [Display(Name = "Name")]
-        [Required(ErrorMessage = "Name is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
+        [DisplayName("Име на Лектор")]
+        [Required(ErrorMessage = "Името е задължително!")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Името трябва да бъде 2 или повече символа!")]
         public string LectureName { get; set; }
 
 
-        [Display(Name = "LastName")]
-        [Required(ErrorMessage = "LastName is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
+        [DisplayName("Фамилно име на Лектор")]
+        [Required(ErrorMessage = "Фамилното име е задължително!")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Фамилното име трябва да бъде повече от 3 символа!")]
         public string LastName { get; set; }
 
-        [Display(Name = "Description")]
-        [Required(ErrorMessage = "Description is required")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between 3 and 50 chars")]
+        [DisplayName("Описание на Лектор")]
+        [Required(ErrorMessage = "Описанието е задължително!")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Описанието трябва да бъде повече от 3 символа!")]
         public string LectureDescription { get; set; }
 
-        [Display(Name = "Profile Picture")]
-        [Required(ErrorMessage = "Profile Picture is required")]
+        [DisplayName("Профилна Снимка на Лектор")]
+        [Required(ErrorMessage = "Профилната Снимка е задължителна!")]
         public IFormFile ProfileImage { get; set; }
     }
 }

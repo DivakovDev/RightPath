@@ -5,38 +5,46 @@
     ViewData["Title"] = "Lectures";
 }
 
-<div class="container pt-4 pb-3">
-    <div class="row mb-3">
-        <div class="col-12">
-            <h1 class="text-primary">Lectures List</h1>
-        </div>
-        <div class="col-12 text-end">
-            <a class="btn btn-primary" asp-action="Create">
-                <i class="bi bi-plus-circle"></i> Add New
-            </a>
+<div class="card shadow border-0 mt-4" style="min-height: 100vh;">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">Лектори</h2>
+            </div>
         </div>
     </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-action="Create" class="btn btn-primary shadow">
+                    <i class="bi bi-plus-circle"></i> Добавяне на Лектор
+                </a>
+            </div>
+        </div>
 
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card mb-10 mt-4">
-                    <div class="p-3">
-                        <img class="card-img-top rounded-circle mx-auto d-block" src="~/Images/@item.ProfileImage" alt="Profile Image" style="width: 150px; height: 150px; object-fit: cover;" />
-                    </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.LectureName)</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.LastName)</h6>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.LectureDescription)</p>
-                        <div>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light btn-sm">Edit</a>
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card mb-10 mt-4 shadow">
+                        <div class="p-3">
+                            <img class="card-img-top rounded-circle mx-auto d-block" src="~/Images/@item.ProfileImage" alt="Profile Image" style="width: 150px; height: 150px; object-fit: cover;" />
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.LectureName)</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.LastName)</h6>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.LectureDescription)</p>
+                            <div class="d-flex justify-content-center">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light btn-sm shadow">Редактиране</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm shadow">Още</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm shadow">Изтрий</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>

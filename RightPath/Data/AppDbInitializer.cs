@@ -107,6 +107,41 @@ namespace RightPath.Data
 
                     context.SaveChanges();
                 }
+
+                if (!context.Cities.Any())
+                {
+
+                    context.Cities.AddRange(new List<City>()
+                    {
+                       new City()
+                       { 
+                          Name = "София",
+                          DisplayOrder = 1
+                       },
+                       new City()
+                       {
+                          Name = "Пловдив",
+                          DisplayOrder = 2
+                       },
+                       new City()
+                       {
+                          Name = "Варна",
+                          DisplayOrder = 3
+                       },
+                       new City()
+                       {
+                          Name = "Бургас",
+                          DisplayOrder = 4
+                       },
+                       new City()
+                       {
+                          Name = "Русе",
+                          DisplayOrder = 5
+                       },
+                    });
+
+                    context.SaveChanges();
+                }
             }
         }
     }
