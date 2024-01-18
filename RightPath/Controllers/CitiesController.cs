@@ -7,41 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RightPath.Data;
 using RightPath.Models;
+using RightPath.Repository.IRepository;
 
 namespace RightPath.Controllers
 {
     public class CitiesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICityRepository _cityRepo;
 
-        public CitiesController(ApplicationDbContext context)
+        public CitiesController(ICityRepository context)
         {
-            _context = context;
+            _cityRepo = context;
         }
 
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cities.ToListAsync());
+            List<City> objCityList = _cityRepo.GetAll().ToList();
+            return View(objCityList);
         }
 
-        // GET: Cities/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Cities/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
-            {
-                return NotFound();
-            }
+        //    var city = await _context.Cities
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (city == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(city);
-        }
+        //    return View(city);
+        //}
 
         // GET: Cities/Create
         public IActionResult Create()
@@ -58,8 +60,8 @@ namespace RightPath.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(city);
-                await _context.SaveChangesAsync();
+                _cityRepo.Add(city);
+                _cityRepo.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(city);
@@ -73,7 +75,7 @@ namespace RightPath.Controllers
                 return NotFound();
             }
 
-            City city = _context.Cities.Find(id);
+            City city = _cityRepo.Get(u => u.Id == id);
             if (city == null)
             {
                 return NotFound();
@@ -91,8 +93,8 @@ namespace RightPath.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Cities.Update(city);
-                _context.SaveChanges();
+                _cityRepo.Update(city);
+                _cityRepo.Save();
                 return RedirectToAction("Index");
             }
             return View(city);
@@ -106,14 +108,14 @@ namespace RightPath.Controllers
                 return NotFound();
             }
 
-            var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            City? cityFromDb = _cityRepo
+                .Get(u => u.Id == id);
+            if (cityFromDb == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(cityFromDb);
         }
 
         // POST: Cities/Delete/5
@@ -121,13 +123,13 @@ namespace RightPath.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            City city = _context.Cities.Find(id);
-            if (city == null)
+            City? obj= _cityRepo.Get(u => u.Id == id);
+            if (obj == null)
             {
                 return NotFound();
             }
-            _context.Cities.Remove(city);
-            _context.SaveChanges();
+            _cityRepo.Remove(obj);
+            _cityRepo.Save();
             return RedirectToAction("Index");
         }
     }
