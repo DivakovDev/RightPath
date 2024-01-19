@@ -17,7 +17,7 @@ namespace RightPath
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddScoped<ICityRepository, CityRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

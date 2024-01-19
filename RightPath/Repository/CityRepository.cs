@@ -14,11 +14,6 @@ namespace RightPath.Repository
             _context = context;
         }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-
         public void Update(City obj)
         {
             _context.Cities.Update(obj);

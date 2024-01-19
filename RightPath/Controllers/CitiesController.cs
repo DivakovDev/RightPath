@@ -13,37 +13,19 @@ namespace RightPath.Controllers
 {
     public class CitiesController : Controller
     {
-        private readonly ICityRepository _cityRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CitiesController(ICityRepository context)
+        public CitiesController(IUnitOfWork unitOfWork)
         {
-            _cityRepo = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Cities
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            List<City> objCityList = _cityRepo.GetAll().ToList();
+            List<City> objCityList = _unitOfWork.City.GetAll().ToList();
             return View(objCityList);
         }
-
-        //// GET: Cities/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var city = await _context.Cities
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (city == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(city);
-        //}
 
         // GET: Cities/Create
         public IActionResult Create()
@@ -51,31 +33,35 @@ namespace RightPath.Controllers
             return View();
         }
 
-        // POST: Cities/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,DisplayOrder")] City city)
+        public IActionResult Create(City city)
         {
+            if(city.Name == city.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name");
+            }
+
             if (ModelState.IsValid)
             {
-                _cityRepo.Add(city);
-                _cityRepo.Save();
-                return RedirectToAction(nameof(Index));
+                _unitOfWork.City.Add(city);
+                _unitOfWork.Save();
+                TempData["success"] = "Category created successfully";
+                return RedirectToAction("Index");
             }
-            return View(city);
+            return View();
         }
 
         // GET: Cities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            City city = _cityRepo.Get(u => u.Id == id);
+            City? city = _unitOfWork.City.Get(u => u.Id == id);
+
             if (city == null)
             {
                 return NotFound();
@@ -83,32 +69,30 @@ namespace RightPath.Controllers
             return View(city);
         }
 
-        // POST: Cities/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(City city)
+        public IActionResult Edit(City city)
         {
 
             if (ModelState.IsValid)
             {
-                _cityRepo.Update(city);
-                _cityRepo.Save();
+                _unitOfWork.City.Update(city);
+                _unitOfWork.Save();
+                TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
-            return View(city);
+            return View();
         }
 
         // GET: Cities/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            City? cityFromDb = _cityRepo
+            City? cityFromDb = _unitOfWork.City
                 .Get(u => u.Id == id);
             if (cityFromDb == null)
             {
@@ -121,15 +105,16 @@ namespace RightPath.Controllers
         // POST: Cities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int? id)
         {
-            City? obj= _cityRepo.Get(u => u.Id == id);
+            City? obj= _unitOfWork.City.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _cityRepo.Remove(obj);
-            _cityRepo.Save();
+            _unitOfWork.City.Remove(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
         }
     }
