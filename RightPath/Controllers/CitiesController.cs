@@ -46,7 +46,7 @@ namespace RightPath.Controllers
             {
                 _unitOfWork.City.Add(city);
                 _unitOfWork.Save();
-                TempData["success"] = "Category created successfully";
+                TempData["success"] = "Градът е създаден успешно!";
                 return RedirectToAction("Index");
             }
             return View();
@@ -78,7 +78,7 @@ namespace RightPath.Controllers
             {
                 _unitOfWork.City.Update(city);
                 _unitOfWork.Save();
-                TempData["success"] = "Category updated successfully";
+                TempData["success"] = "Детайлите по градът са променени успешно!";
                 return RedirectToAction("Index");
             }
             return View();
@@ -114,7 +114,7 @@ namespace RightPath.Controllers
             }
             _unitOfWork.City.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Category deleted successfully";
+            TempData["success"] = "Градът е изтрит успешно!";
             return RedirectToAction("Index");
         }
     }
