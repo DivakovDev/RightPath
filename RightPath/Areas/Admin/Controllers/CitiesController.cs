@@ -9,8 +9,9 @@ using RightPath.Data;
 using RightPath.Models;
 using RightPath.Repository.IRepository;
 
-namespace RightPath.Controllers
+namespace RightPath.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CitiesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -37,7 +38,7 @@ namespace RightPath.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(City city)
         {
-            if(city.Name == city.DisplayOrder.ToString())
+            if (city.Name == city.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name");
             }
@@ -107,7 +108,7 @@ namespace RightPath.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
         {
-            City? obj= _unitOfWork.City.Get(u => u.Id == id);
+            City? obj = _unitOfWork.City.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
