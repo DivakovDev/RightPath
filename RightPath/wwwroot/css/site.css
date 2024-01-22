@@ -1,98 +1,51 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-}
-/*Lecture page css*/
-/* General Styles for the Page */
-h1 {
-    color: #333;
-    font-size: 24px;
+    margin-bottom: 60px;
 }
 
-.create-link {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-    .create-link:hover {
-        background-color: #0056b3;
-    }
-
-/* Styles for the Table */
-.styled-table {
+/*Table Style*/
+.table-custom {
     width: 100%;
     border-collapse: collapse;
 }
 
-.table-header {
-    background-color: #f8f9fa;
-}
-
-    .table-header th {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #dee2e6;
+    .table-custom thead {
+        background-color: #f2f2f2;
     }
 
-/* Styles for Table Rows */
-.table-row {
-    border-bottom: 1px solid #ddd;
-}
-
-    .table-row td {
-        padding: 10px;
+    .table-custom th, .table-custom td {
         text-align: left;
+        padding: 8px;
     }
 
-/* Image Styling */
-.rounded-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
+    .table-custom th {
+        font-weight: bold;
+    }
+
+    .table-custom tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+.btn-group {
+    text-align: center;
 }
 
-/* Link Styling */
-.action-links a {
-    display: inline-flex; /* Allows width and vertical alignment */
-    text-decoration: none;
-    color: #007bff;
-    margin-right: 10px;
-    padding: 5px 10px; /* Adds some padding around the text */
-    border: 1px solid #007bff; /* Adds a border */
-    border-radius: 10px; /* Rounds the corners of the border */
-    text-align: center; /* Aligns text in the center */
-}
-
-.action-links {
-    text-align: center; /* Centers the links in the table cell */
-    vertical-align: middle;
-}
-
-.action-links a:hover {
-    background-color: #0056b3;
-    color: white;
-    text-decoration: none;
-}
+/*Table style end*/

@@ -9,11 +9,14 @@ namespace RightPath.Repository
         private ApplicationDbContext _context;
         public ICityRepository City { get; private set; }
         public IWebminarRepository Webminar { get; private set; }
+
+        public ILectureRepository Lecture { get; private set; }
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             City = new CityRepository(_context);
             Webminar = new WebminarRepository(_context);
+            Lecture = new LectureRepository(_context);
         }
 
 

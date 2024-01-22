@@ -8,7 +8,7 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-primary py-2">Cities List</h2>
+                <h2 class="text-primary py-2">Списък от Градове</h2>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 </a>
             </div>
         </div>
-        <table class="table table-bordered table-striped">
+        <table class="table table-custom table-striped table-bordered">
             <thead>
                 <tr>
                     <th>
@@ -44,10 +44,10 @@
                         </td>
                         <td>
                             <div class="d-flex justify-content-center" role="group">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="w-50 shadow btn btn-light mx-2">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="w-8 shadow btn btn-light mx-2">
                                     <i class="bi bi-pencil-square"></i> Редактиране
                                 </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="w-50 shadow btn btn-danger mx-2">
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="w-8 shadow btn btn-danger mx-2">
                                     <i class="bi bi-trash-fill"></i> Изтрий
                                 </a>
                             </div>

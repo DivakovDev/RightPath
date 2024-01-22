@@ -32,6 +32,21 @@ namespace RightPath.Areas.Admin.Controllers
         // GET: Webminars/Create
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CityList = _unitOfWork.City.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+
+            ViewData["CityList"] = CityList;
+
+            IEnumerable <SelectListItem> LectureList = _unitOfWork.Lecture.GetAll().Select(y => new SelectListItem
+            {
+                Text = y.Name,
+                Value = y.Id.ToString()
+            });
+
+            ViewData["LectureList"] = LectureList;
             return View();
         }
 

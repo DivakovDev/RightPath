@@ -5,6 +5,8 @@
         ICityRepository City { get; }
         IWebminarRepository Webminar { get; }
 
+        ILectureRepository Lecture { get; }
+
         void Save();
     }
 }
