@@ -1,4 +1,4 @@
-﻿@model RightPath.Models.NewModelView.CourseImage
+﻿@model RightPath.Models.Course;
 
 @{
     ViewData["Title"] = "Create Course";
@@ -37,11 +37,11 @@
                 <input asp-for="Lecture2" class="form-control" />
                 <span asp-validation-for="Lecture2" class="text-danger"></span>
             </div>
-            <div class="form-group mt-3">
+            @* <div class="form-group mt-3">
                 <label asp-for="CourseLogo" class="control-label"></label>
                 <input type="file" asp-for="CourseLogo" id="customFile" />
                 <span asp-validation-for="CourseLogo" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary btn-md" />
                 <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>

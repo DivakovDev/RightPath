@@ -16,63 +16,63 @@ namespace RightPath.Data
 
                 context.Database.EnsureCreated();
 
-                if (!context.Lectures.Any())
-                {
+                //if (!context.Lectures.Any())
+                //{
 
-                    context.Lectures.AddRange(new List<Lecture>()
-                    { 
-                       new Lecture()
-                        {
+                //    context.Lectures.AddRange(new List<Lecture>()
+                //    { 
+                //       new Lecture()
+                //        {
                             
-                            LectureName = "Lector1",
-                            LastName= "Lector1LastName",
-                            LectureDescription = "Opicanie na  lector1",
-                            ProfileImage = "lecture1.png"
+                //            LectureName = "Lector1",
+                //            LastName= "Lector1LastName",
+                //            LectureDescription = "Opicanie na  lector1",
+                //            ProfileImage = "lecture1.png"
 
-                        },
-                        new Lecture()
-                        {
+                //        },
+                //        new Lecture()
+                //        {
                             
-                            LectureName = "Lector2",
-                            LastName= "Lector2LastName",
-                            LectureDescription = "Opicanie na  lector2",
-                            ProfileImage = "lecture1.png"
+                //            LectureName = "Lector2",
+                //            LastName= "Lector2LastName",
+                //            LectureDescription = "Opicanie na  lector2",
+                //            ProfileImage = "lecture1.png"
 
-                        }
-                    });
+                //        }
+                //    });
 
-                    context.SaveChanges();
-                }
+                //    context.SaveChanges();
+                //}
 
-                if (!context.Courses.Any())
-                {
+                //if (!context.Courses.Any())
+                //{
 
-                    context.Courses.AddRange(new List<Course>()
-                        {
-                            new Course()
-                            {
-                                CourseTitle = "Full Stack Developer Course",
-                                CourseDescription= "You will learn how to be full stack developer from the basics!",
-                                CourseDuration = 12.30,
-                                CourseLogo = "lecture1.png",
-                                Lecture1 = "Yuli Farhson",
-                                Lecture2 = "Yuli Robertson",
+                //    context.Courses.AddRange(new List<Course>()
+                //        {
+                //            new Course()
+                //            {
+                //                CourseTitle = "Full Stack Developer Course",
+                //                CourseDescription= "You will learn how to be full stack developer from the basics!",
+                //                CourseDuration = 12.30,
+                //                CourseLogo = "lecture1.png",
+                //                Lecture1 = "Yuli Farhson",
+                //                Lecture2 = "Yuli Robertson",
 
-                            },
-                            new Course()
-                            {
-                                CourseTitle = "Back End Developer Course",
-                                CourseDescription= "You will learn how to be back end developer from the basics!",
-                                CourseDuration = 11.30,
-                                CourseLogo = "lecture1.png",
-                                Lecture1 = "Duncun Harfkak",
-                                Lecture2 = "Joe Hudson",
+                //            },
+                //            new Course()
+                //            {
+                //                CourseTitle = "Back End Developer Course",
+                //                CourseDescription= "You will learn how to be back end developer from the basics!",
+                //                CourseDuration = 11.30,
+                //                CourseLogo = "lecture1.png",
+                //                Lecture1 = "Duncun Harfkak",
+                //                Lecture2 = "Joe Hudson",
 
-                            },
-                        });
+                //            },
+                //        });
 
-                    context.SaveChanges();
-                }
+                //    context.SaveChanges();
+                //}
 
                 if (!context.Cities.Any())
                 {

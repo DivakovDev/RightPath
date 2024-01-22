@@ -1,4 +1,4 @@
-﻿@model RightPath.Models.NewModelView.WebminarImage
+﻿@model RightPath.Models.Webminar;
 
 @{
     ViewData["Title"] = "Create Webminar";
@@ -47,11 +47,11 @@
                 <input asp-for="Lecture2" class="form-control" />
                 <span asp-validation-for="Lecture2" class="text-danger"></span>
             </div>
-            <div class="form-group mt-2">
+            @* <div class="form-group mt-2">
                 <label asp-for="WebminarLogo" class="control-label"></label>
                 <input type="file" asp-for="WebminarLogo" id="customFile" />
                 <span asp-validation-for="WebminarLogo" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary btn-md" />
                 <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
