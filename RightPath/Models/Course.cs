@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RightPath.Models
 {
@@ -10,30 +12,30 @@ namespace RightPath.Models
 
         [Required(ErrorMessage = "Името е задължително!")]
         [DisplayName("Име на Курса")]
-        public string CourseTitle { get; set; }
+        public string Title { get; set; }
 
         [Required(ErrorMessage = "Описанието е задължително!")]
         [DisplayName("Описание на Курса")]
-        public string CourseDescription { get; set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "Времетраенето задължително трябва да бъде в часове!")]
         [DisplayName("Времетраене на Курса")]
-        public double CourseDuration { get; set; }
+        public double Duration { get; set; }
 
         [Required(ErrorMessage = "Корицата е задължителна!")]
         [DisplayName("Корица на Курса")]
-        public string CourseLogo { get; set; }
+        public string Logo { get; set; }
 
-        [Required(ErrorMessage = "Водещия лектор е задължителен!")]
-        [DisplayName("Водещ Лектор")]
-        public string Lecture1 { get; set; }
+        public int Lecture1Id { get; set; }
+        [ForeignKey("Lecture1Id")]
+        [ValidateNever]
 
         [Required(ErrorMessage = "Помощник лектора е задължителен!")]
         [DisplayName("Помощник Лектор")]
-        public string Lecture2 { get; set; }
-
-        //Relation
-        public List<Course_Lector> Courses_Lectures { get; set; }
+        public int Lecture2Id { get; set; }
+        [ForeignKey("Lecture2Id")]
+        [ValidateNever]
+        public Lecture Lecture { get; set; }
 
     }
 }

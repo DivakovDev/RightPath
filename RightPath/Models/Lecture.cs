@@ -10,7 +10,7 @@ namespace RightPath.Models
 
         [Required(ErrorMessage = "Името е задължително!")]
         [DisplayName("Име на Лектор")]
-        public string LectureName { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Фамилното име е задължително!")]
         [DisplayName("Фамилно име на Лектор")]
@@ -18,18 +18,18 @@ namespace RightPath.Models
 
         [Required(ErrorMessage = "Описанието е задължително!")]
         [DisplayName("Описание на Лектор")]
-        public string LectureDescription { get; set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "Профилната снимка е задължителна!")]
         [DisplayName("Профилна Снимка")]
         public string ProfileImage { get; set; }
 
-        //Realtion for Course
-        public List<Course_Lector> Courses_Lectures { get; set; }
+        ////Realtion for Course
+        //public List<Course_Lector> Courses_Lectures { get; set; }
 
 
-        //Relation for Webminar
-        public List<Webminar_Lector> Webminars_Lectures { get; set; }
+        ////Relation for Webminar
+        //public List<Webminar_Lector> Webminars_Lectures { get; set; }
 
 
 

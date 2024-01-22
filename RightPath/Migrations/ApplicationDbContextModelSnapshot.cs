@@ -226,22 +226,21 @@ namespace RightPath.Migrations
 
             modelBuilder.Entity("RightPath.Models.City", b =>
                 {
-                    b.Property<int>("CityId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("WebminarId")
+                    b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
-                    b.HasKey("CityId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
-                    b.HasIndex("WebminarId");
+                    b.HasKey("Id");
 
                     b.ToTable("Cities");
                 });
@@ -254,52 +253,32 @@ namespace RightPath.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CourseDescription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("CourseDuration")
+                    b.Property<double>("Duration")
                         .HasColumnType("float");
 
-                    b.Property<string>("CourseLogo")
+                    b.Property<int>("Lecture1Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Lecture2Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CourseTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lecture1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lecture2")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Lecture2Id");
+
                     b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("RightPath.Models.Course_Lector", b =>
-                {
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LectureId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WebminarId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CourseId", "LectureId");
-
-                    b.HasIndex("LectureId");
-
-                    b.HasIndex("WebminarId");
-
-                    b.ToTable("Courses_Lectures");
                 });
 
             modelBuilder.Entity("RightPath.Models.Lecture", b =>
@@ -310,15 +289,15 @@ namespace RightPath.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LectureDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LectureName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -339,14 +318,20 @@ namespace RightPath.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Lecture1")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Lecture2")
+                    b.Property<int>("Lecture1Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Lecture2Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -357,36 +342,13 @@ namespace RightPath.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("WebminarDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebminarLocation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WebminarLogo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("Lecture2Id");
+
                     b.ToTable("Webminars");
-                });
-
-            modelBuilder.Entity("RightPath.Models.Webminar_Lector", b =>
-                {
-                    b.Property<int>("WebminarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LectureId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WebminarId", "LectureId");
-
-                    b.HasIndex("LectureId");
-
-                    b.ToTable("Webminars_Lectures");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -440,74 +402,34 @@ namespace RightPath.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RightPath.Models.City", b =>
-                {
-                    b.HasOne("RightPath.Models.Webminar", null)
-                        .WithMany("Cities")
-                        .HasForeignKey("WebminarId");
-                });
-
-            modelBuilder.Entity("RightPath.Models.Course_Lector", b =>
-                {
-                    b.HasOne("RightPath.Models.Course", "Course")
-                        .WithMany("Courses_Lectures")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RightPath.Models.Lecture", "Lecture")
-                        .WithMany("Courses_Lectures")
-                        .HasForeignKey("LectureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RightPath.Models.Webminar", null)
-                        .WithMany("Courses_Lectures")
-                        .HasForeignKey("WebminarId");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Lecture");
-                });
-
-            modelBuilder.Entity("RightPath.Models.Webminar_Lector", b =>
-                {
-                    b.HasOne("RightPath.Models.Lecture", "Lecture")
-                        .WithMany("Webminars_Lectures")
-                        .HasForeignKey("LectureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RightPath.Models.Webminar", "Webminar")
-                        .WithMany("Webminars_Lectures")
-                        .HasForeignKey("WebminarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lecture");
-
-                    b.Navigation("Webminar");
-                });
-
             modelBuilder.Entity("RightPath.Models.Course", b =>
                 {
-                    b.Navigation("Courses_Lectures");
-                });
+                    b.HasOne("RightPath.Models.Lecture", "Lecture")
+                        .WithMany()
+                        .HasForeignKey("Lecture2Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("RightPath.Models.Lecture", b =>
-                {
-                    b.Navigation("Courses_Lectures");
-
-                    b.Navigation("Webminars_Lectures");
+                    b.Navigation("Lecture");
                 });
 
             modelBuilder.Entity("RightPath.Models.Webminar", b =>
                 {
-                    b.Navigation("Cities");
+                    b.HasOne("RightPath.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Courses_Lectures");
+                    b.HasOne("RightPath.Models.Lecture", "Lecture")
+                        .WithMany()
+                        .HasForeignKey("Lecture2Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Webminars_Lectures");
+                    b.Navigation("City");
+
+                    b.Navigation("Lecture");
                 });
 #pragma warning restore 612, 618
         }

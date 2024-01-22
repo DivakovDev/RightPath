@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RightPath.Migrations
 {
     /// <inheritdoc />
-    public partial class InitlizeDb : Migration
+    public partial class INtilaDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,32 +65,14 @@ namespace RightPath.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseDuration = table.Column<double>(type: "float", nullable: false),
-                    CourseLogo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture2 = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Lectures",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LectureName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LectureDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProfileImage = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -205,19 +187,42 @@ namespace RightPath.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Duration = table.Column<double>(type: "float", nullable: false),
+                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Lecture1Id = table.Column<int>(type: "int", nullable: false),
+                    Lecture2Id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Courses_Lectures_Lecture2Id",
+                        column: x => x.Lecture2Id,
+                        principalTable: "Lectures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Webminars",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WebminarDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
-                    WebminarLogo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture2 = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Lecture1Id = table.Column<int>(type: "int", nullable: false),
+                    Lecture2Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,52 +233,10 @@ namespace RightPath.Migrations
                         principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Courses_Lectures",
-                columns: table => new
-                {
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    LectureId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses_Lectures", x => new { x.CourseId, x.LectureId });
                     table.ForeignKey(
-                        name: "FK_Courses_Lectures_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Courses_Lectures_Lectures_LectureId",
-                        column: x => x.LectureId,
+                        name: "FK_Webminars_Lectures_Lecture2Id",
+                        column: x => x.Lecture2Id,
                         principalTable: "Lectures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Webminars_Lectures",
-                columns: table => new
-                {
-                    WebminarId = table.Column<int>(type: "int", nullable: false),
-                    LectureId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Webminars_Lectures", x => new { x.WebminarId, x.LectureId });
-                    table.ForeignKey(
-                        name: "FK_Webminars_Lectures_Lectures_LectureId",
-                        column: x => x.LectureId,
-                        principalTable: "Lectures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Webminars_Lectures_Webminars_WebminarId",
-                        column: x => x.WebminarId,
-                        principalTable: "Webminars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -318,9 +281,9 @@ namespace RightPath.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_Lectures_LectureId",
-                table: "Courses_Lectures",
-                column: "LectureId");
+                name: "IX_Courses_Lecture2Id",
+                table: "Courses",
+                column: "Lecture2Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Webminars_CityId",
@@ -328,9 +291,9 @@ namespace RightPath.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Webminars_Lectures_LectureId",
-                table: "Webminars_Lectures",
-                column: "LectureId");
+                name: "IX_Webminars_Lecture2Id",
+                table: "Webminars",
+                column: "Lecture2Id");
         }
 
         /// <inheritdoc />
@@ -352,10 +315,10 @@ namespace RightPath.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Courses_Lectures");
+                name: "Courses");
 
             migrationBuilder.DropTable(
-                name: "Webminars_Lectures");
+                name: "Webminars");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -364,16 +327,10 @@ namespace RightPath.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Lectures");
-
-            migrationBuilder.DropTable(
-                name: "Webminars");
-
-            migrationBuilder.DropTable(
-                name: "Cities");
         }
     }
 }

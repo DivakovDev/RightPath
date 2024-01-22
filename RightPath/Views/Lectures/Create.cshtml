@@ -11,9 +11,9 @@
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group py-1">
-                <label asp-for="LectureName" class="control-label"></label>
-                <input asp-for="LectureName" class="form-control" />
-                <span asp-validation-for="LectureName" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
                 <label asp-for="LastName" class="control-label"></label>
@@ -21,9 +21,9 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="LectureDescription" class="control-label"></label>
-                <input asp-for="LectureDescription" class="form-control" />
-                <span asp-validation-for="LectureDescription" class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             @* <div class="form-group row py-1">
                 <label asp-for="ProfileImage" class="control-label mb-1"></label>

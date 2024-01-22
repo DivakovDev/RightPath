@@ -33,9 +33,9 @@
                             <img class="card-img-top rounded-circle mx-auto d-block" src="~/Images/@item.ProfileImage" alt="Profile Image" style="width: 150px; height: 150px; object-fit: cover;" />
                         </div>
                         <div class="card-body text-center">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.LectureName)</h5>
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                             <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.LastName)</h6>
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.LectureDescription)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
                             <div class="d-flex justify-content-center">
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-light btn-sm shadow">Редактиране</a>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm shadow">Още</a>

@@ -16,63 +16,68 @@ namespace RightPath.Data
 
                 context.Database.EnsureCreated();
 
-                //if (!context.Lectures.Any())
-                //{
+                if (!context.Lectures.Any())
+                {
 
-                //    context.Lectures.AddRange(new List<Lecture>()
-                //    { 
-                //       new Lecture()
-                //        {
-                            
-                //            LectureName = "Lector1",
-                //            LastName= "Lector1LastName",
-                //            LectureDescription = "Opicanie na  lector1",
-                //            ProfileImage = "lecture1.png"
+                    context.Lectures.AddRange(new List<Lecture>()
+                    {
+                       new Lecture()
+                        {
+                            Name = "Lector1",
+                            LastName= "Lector1LastName",
+                            Description = "Opicanie na  lector1",
+                            ProfileImage = "lecture1.png"
 
-                //        },
-                //        new Lecture()
-                //        {
-                            
-                //            LectureName = "Lector2",
-                //            LastName= "Lector2LastName",
-                //            LectureDescription = "Opicanie na  lector2",
-                //            ProfileImage = "lecture1.png"
+                        },
+                        new Lecture()
+                        {
+                            Name = "Lector2",
+                            LastName= "Lector2LastName",
+                            Description = "Opicanie na  lector2",
+                            ProfileImage = "lecture1.png"
 
-                //        }
-                //    });
+                        },
+                        new Lecture()
+                        {
+                            Name = "Lector2",
+                            LastName= "Lector2LastName",
+                            Description = "Opicanie na  lector2",
+                            ProfileImage = "lecture1.png"
+                        }
+                    }) ;
 
-                //    context.SaveChanges();
-                //}
+                    context.SaveChanges();
+                }
 
-                //if (!context.Courses.Any())
-                //{
+                if (!context.Courses.Any())
+                {
 
-                //    context.Courses.AddRange(new List<Course>()
-                //        {
-                //            new Course()
-                //            {
-                //                CourseTitle = "Full Stack Developer Course",
-                //                CourseDescription= "You will learn how to be full stack developer from the basics!",
-                //                CourseDuration = 12.30,
-                //                CourseLogo = "lecture1.png",
-                //                Lecture1 = "Yuli Farhson",
-                //                Lecture2 = "Yuli Robertson",
+                    context.Courses.AddRange(new List<Course>()
+                        {
+                            new Course()
+                            {
+                                Title = "Full Stack Developer Course",
+                                Description= "You will learn how to be full stack developer from the basics!",
+                                Duration = 12.30,
+                                Logo = "lecture1.png",
+                                Lecture1Id = 1,
+                                Lecture2Id = 2,
 
-                //            },
-                //            new Course()
-                //            {
-                //                CourseTitle = "Back End Developer Course",
-                //                CourseDescription= "You will learn how to be back end developer from the basics!",
-                //                CourseDuration = 11.30,
-                //                CourseLogo = "lecture1.png",
-                //                Lecture1 = "Duncun Harfkak",
-                //                Lecture2 = "Joe Hudson",
+                            },
+                            new Course()
+                            {
+                                Title = "Back End Developer Course",
+                                Description= "You will learn how to be back end developer from the basics!",
+                                Duration = 11.30,
+                                Logo = "lecture1.png",
+                                Lecture1Id = 3,
+                                Lecture2Id = 2,
 
-                //            },
-                //        });
+                            },
+                        });
 
-                //    context.SaveChanges();
-                //}
+                    context.SaveChanges();
+                }
 
                 if (!context.Cities.Any())
                 {
@@ -117,39 +122,36 @@ namespace RightPath.Data
                             new Webminar()
                             {
                                 Title = "Sofia Streets WebMinnar",
-                                WebminarDescription = "You will learn about sofia underground",
+                                Description = "You will learn about sofia underground",
                                 StartDate = new DateTime(2023, 12, 24),
-                                EndDate = new DateTime(2023, 12, 25), 
                                 CityId = 1,
-                                WebminarLogo = "lecture1.png",
-                                Lecture1 = "Harry Maguire",
-                                Lecture2 = "Jonny Sins"
+                                Logo = "lecture1.png",
+                                Lecture1Id = 3,
+                                Lecture2Id = 2
 
                             },
                             new Webminar()
                             {
-                                Title = "NoWebminar",
-                                WebminarDescription = "You will learn about how to invest",
-                                StartDate = new DateTime(2023, 12, 20),
-                                EndDate = new DateTime(2023, 12, 21),
-                                CityId = 3,
-                                WebminarLogo = "lecture1.png",
-                                Lecture1 = "Harry Maguire",
-                                Lecture2 = "Jonny Sins"
-
-                            },
-                            new Webminar()
-                            {
-                                Title = "WebMinnar For Sales",
-                                WebminarDescription = "You will learn about Sales",
+                                Title = "WebMinnar",
+                                Description = "You will learn about sofia underground",
                                 StartDate = new DateTime(2023, 12, 24),
-                                EndDate = new DateTime(2023, 12, 25),
-                                CityId = 2,
-                                WebminarLogo = "lecture1.png",
-                                Lecture1 = "Dundy Maguire",
-                                Lecture2 = "Jonny Deb"
+                                CityId = 1,
+                                Logo = "lecture1.png",
+                                Lecture1Id = 1,
+                                Lecture2Id = 3
 
-                            }
+                            },
+                            new Webminar()
+                            {
+                                Title = "Sofia WebMinnar",
+                                Description = "You will learn about sofia underground",
+                                StartDate = new DateTime(2023, 12, 24),
+                                CityId = 1,
+                                Logo = "lecture1.png",
+                                Lecture1Id = 1,
+                                Lecture2Id = 2
+
+                            },
                         });
 
                     context.SaveChanges();

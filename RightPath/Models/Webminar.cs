@@ -14,18 +14,13 @@ namespace RightPath.Models
         [DisplayName("Име на Уебминар")]
         public string Title { get; set; }
 
-
         [Required(ErrorMessage = "Описанието е задължително!")]
         [DisplayName("Описание на Уебминар")]
-        public string WebminarDescription { get; set; }
+        public string Description { get; set; }
 
         [Required(ErrorMessage = "Началната дата е задължителна!")]
         [DisplayName("Начална Дата")]
         public DateTime StartDate { get; set; }
-
-        [Required(ErrorMessage = "Крайната дата е задължителна!")]
-        [DisplayName("Крайна Дата")]
-        public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "Локацията е задължителна!")]
         [DisplayName("Локация на Събитието")]
@@ -37,18 +32,23 @@ namespace RightPath.Models
         [Required(ErrorMessage = "Корицата е задължителна")]
         [DisplayName("Снимка на Уебминара")]
         [ValidateNever]
-        public string WebminarLogo{ get; set; }
+        public string Logo{ get; set; }
 
         [Required(ErrorMessage = "Водещият Лектор е задължителен!")]
         [DisplayName("Водещ Лектор")]
-        public string Lecture1 { get; set; }
+        public int Lecture1Id { get; set; }
+        [ForeignKey("Lecture1Id")]
+        [ValidateNever]
 
         [Required(ErrorMessage = "Помощник лектора е задължителен!")]
         [DisplayName("Помощник Лектор")]
-        public string Lecture2 { get; set; }
+        public int Lecture2Id { get; set; }
+        [ForeignKey("Lecture2Id")]
+        [ValidateNever]
+        public Lecture Lecture { get; set; }
 
         //Relation for Webminar
-        public List<Webminar_Lector> Webminars_Lectures { get; set; }
+        //public List<Webminar_Lector> Webminars_Lectures { get; set; }
 
     }
 }
