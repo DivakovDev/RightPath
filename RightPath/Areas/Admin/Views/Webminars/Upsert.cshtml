@@ -1,12 +1,11 @@
 ﻿@model WebminarVM;
 
-<h1 class="fw-bold">Създай</h1>
-
-<h5>Уебминар</h5>
+<h1>@(Model.Webminar.Id != 0 ? "Редактирай" : "Създай") Уебминар</h1>
 <hr />
 <div class="row justify-content-center">
-    <div class="col-12">
-        <form asp-action="Create">
+    <div class="col-10">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <input asp-for="Webminar.Id" hidden />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group py-1">
                 <label asp-for="Webminar.Title" class="control-label"></label>
@@ -46,14 +45,32 @@
             </div>
             <div class="form-group py-1">
                 <label asp-for="Webminar.Logo" class="control-label"></label>
-                <input asp-for="Webminar.Logo" class="form-control" />
-                <span asp-validation-for="Webminar.Logo" class="text-danger"></span>
+                <input type="file" class="form-control border-0 shadow" />
             </div>
-            <div class="form-group mt-3">
-                <input type="submit" value="Create" class="btn btn-primary btn-md" />
-                <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
+            <div class="row pt-3">
+                <div class="col-6 col-md-1">
+                    @if(Model.Webminar.Id != 0)
+                    {
+                        <button type="submit" value="Create" class="btn btn-primary btn-md">
+                            Update
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="submit" value="Create" class="btn btn-primary btn-md">
+                            Create
+                        </button>
+                    }
+                </div>
+                <div class ="col-6 col-md-3">
+                    <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
+                </div>
             </div>
         </form>
+    </div>
+    <div class="col-2">
+        <img id="courseLogo" src="~/Images/@Model.Webminar.Logo" width="100%" alt="LectureProfilePicture"
+             style="border-radius:5px; border:1px solid #bbb9b9;" />
     </div>
 </div>
 

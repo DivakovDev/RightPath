@@ -1,10 +1,6 @@
 ﻿@using RightPath.Models;
 @model IEnumerable<RightPath.Models.Webminar>
 
-@{
-    ViewData["Title"] = "Webminars";
-}
-
 <partial name="_Notification" />
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -19,7 +15,7 @@
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="Webminars" asp-action="Create" class="btn btn-primary shadow">
+                <a asp-controller="Webminars" asp-action="Upsert" class="btn btn-primary shadow">
                     <i class="bi bi-plus-circle"></i> Създай нов Уебминар
                 </a>
             </div>
@@ -78,7 +74,7 @@
                         </td>
                         <td>
                             <div class="btn-group badge" role="group">
-                                <a asp-controller="Webminars" asp-action="Edit" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
+                                <a asp-controller="Webminars" asp-action="Upsert" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
                                     <i class="bi bi-pencil-square"></i> Редактирай
                                 </a>
                                 <a asp-controller="Webminars" asp-action="Delete" asp-route-id="@item.Id" class="w-8 shadow btn btn-danger mx-2 px-3">

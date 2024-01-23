@@ -31,7 +31,7 @@ namespace RightPath.Areas.Admin.Controllers
         }
 
         // GET: Webminars/Create
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             WebminarVM webminarVM = new()
             {
@@ -47,12 +47,22 @@ namespace RightPath.Areas.Admin.Controllers
                 }),
                 Webminar = new Webminar()
             };
-            return View(webminarVM);
+            if(id == null || id == 0)
+            {
+                //functionality for create
+                return View(webminarVM);
+            }
+            else
+            {
+                //functionality for edit
+                webminarVM.Webminar = _unitOfWork.Webminar.Get(u=> u.Id == id);
+                return View(webminarVM);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(WebminarVM obj)
+        public IActionResult Upsert(WebminarVM obj, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -65,34 +75,34 @@ namespace RightPath.Areas.Admin.Controllers
 
         }
 
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
+        //public IActionResult Edit(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
 
-            Webminar? webminarFromDb = _unitOfWork.Webminar.Get(u => u.Id == id);
-            if (webminarFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(webminarFromDb);
-        }
+        //    Webminar? webminarFromDb = _unitOfWork.Webminar.Get(u => u.Id == id);
+        //    if (webminarFromDb == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(webminarFromDb);
+        //}
 
-        // POST: Webminars/Edit/5
-        [HttpPost]
-        public IActionResult Edit(Webminar webminar)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Webminar.Update(webminar);
-                _unitOfWork.Save();
-                TempData["success"] = "Уебминара е обновен успешно!";
-                return RedirectToAction("Index");
-            }
-            return View(webminar);
-        }
+        //// POST: Webminars/Edit/5
+        //[HttpPost]
+        //public IActionResult Edit(Webminar webminar)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _unitOfWork.Webminar.Update(webminar);
+        //        _unitOfWork.Save();
+        //        TempData["success"] = "Уебминара е обновен успешно!";
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(webminar);
+        //}
 
         // GET: Webminars/Delete/5
         public IActionResult Delete(int? id)
