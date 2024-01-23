@@ -1,57 +1,53 @@
-﻿@model RightPath.Models.Webminar;
+﻿@model WebminarVM;
 
-@{
-    ViewData["Title"] = "Create Webminar";
-}
+<h1 class="fw-bold">Създай</h1>
 
-<h1 class="fw-bold">Create</h1>
-
-<h5>Webminar</h5>
+<h5>Уебминар</h5>
 <hr />
 <div class="row justify-content-center">
     <div class="col-12">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group py-1">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Webminar.Title" class="control-label"></label>
+                <input asp-for="Webminar.Title" class="form-control" />
+                <span asp-validation-for="Webminar.Title" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Webminar.Description" class="control-label"></label>
+                <input asp-for="Webminar.Description" class="form-control" />
+                <span asp-validation-for="Webminar.Description" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input type="date" asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <label asp-for="Webminar.StartDate" class="control-label"></label>
+                <input type="date" asp-for="Webminar.StartDate" class="form-control" />
+                <span asp-validation-for="Webminar.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="CityId" class="control-label ms-2"></label>
-                <select asp-for="CityId" asp-items="@ViewData["CityList"] as IEnumerable<SelectListItem>" class="form-select">
+                <label asp-for="Webminar.CityId" class="control-label ms-2"></label>
+                <select asp-for="@Model.Webminar.CityId" asp-items="@Model.CityList" class="form-select">
                     <option disabled selected>--Избери Град--</option>
                 </select>
-                <span asp-validation-for="CityId" class="text-danger"></span>
+                <span asp-validation-for="Webminar.CityId" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="Lecture1Id" class="control-label"></label>
-                <select asp-for="CityId" asp-items="@ViewData["LectureList"] as IEnumerable<SelectListItem>" class="form-select">
+                <label asp-for="Webminar.Lecture1Id" class="control-label"></label>
+                <select asp-for="@Model.Webminar.Lecture1Id" asp-items="@Model.LectureList" class="form-select">
                     <option disabled selected>--Избери Водещ Лектор--</option>
                 </select>
-                <span asp-validation-for="Lecture1Id" class="text-danger"></span>
+                <span asp-validation-for="Webminar.Lecture1Id" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="Lecture2Id" class="control-label"></label>
-                <select asp-for="CityId" asp-items="@ViewData["LectureList"] as IEnumerable<SelectListItem>" class="form-select">
+                <label asp-for="Webminar.Lecture2Id" class="control-label"></label>
+                <select asp-for="@Model.Webminar.Lecture2Id" asp-items="@Model.LectureList" class="form-select">
                     <option disabled selected>--Избери Лектор Помощник--</option>
                 </select>
-                <span asp-validation-for="Lecture2Id" class="text-danger"></span>
+                <span asp-validation-for="Webminar.Lecture2Id" class="text-danger"></span>
             </div>
             <div class="form-group py-1">
-                <label asp-for="Logo" class="control-label"></label>
-                <input asp-for="Logo" class="form-control" />
-                <span asp-validation-for="Logo" class="text-danger"></span>
+                <label asp-for="Webminar.Logo" class="control-label"></label>
+                <input asp-for="Webminar.Logo" class="form-control" />
+                <span asp-validation-for="Webminar.Logo" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary btn-md" />

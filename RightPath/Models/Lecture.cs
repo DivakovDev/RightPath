@@ -12,10 +12,6 @@ namespace RightPath.Models
         [DisplayName("Име на Лектор")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Фамилното име е задължително!")]
-        [DisplayName("Фамилно име на Лектор")]
-        public string LastName { get; set; }
-
         [Required(ErrorMessage = "Описанието е задължително!")]
         [DisplayName("Описание на Лектор")]
         public string Description { get; set; }

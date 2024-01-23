@@ -12,8 +12,8 @@ using RightPath.Data;
 namespace RightPath.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240122114444_INtilaDb")]
-    partial class INtilaDb
+    [Migration("20240123074431_dbinitilize")]
+    partial class dbinitilize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,10 +293,6 @@ namespace RightPath.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

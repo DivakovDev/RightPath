@@ -23,24 +23,21 @@ namespace RightPath.Data
                     {
                        new Lecture()
                         {
-                            Name = "Lector1",
-                            LastName= "Lector1LastName",
+                            Name = "Юли Тонкин",
                             Description = "Opicanie na  lector1",
                             ProfileImage = "lecture1.png"
 
                         },
                         new Lecture()
                         {
-                            Name = "Lector2",
-                            LastName= "Lector2LastName",
+                            Name = "Боян Московски",
                             Description = "Opicanie na  lector2",
                             ProfileImage = "lecture1.png"
 
                         },
                         new Lecture()
                         {
-                            Name = "Lector2",
-                            LastName= "Lector2LastName",
+                            Name = "Кристиян Валидолов",
                             Description = "Opicanie na  lector2",
                             ProfileImage = "lecture1.png"
                         }

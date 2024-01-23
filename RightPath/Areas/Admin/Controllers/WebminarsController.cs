@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RightPath.Data;
 using RightPath.Models;
+using RightPath.Models.ViewModel;
 using RightPath.Repository.IRepository;
 
 namespace RightPath.Areas.Admin.Controllers
@@ -32,31 +33,30 @@ namespace RightPath.Areas.Admin.Controllers
         // GET: Webminars/Create
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> CityList = _unitOfWork.City.GetAll().Select(u => new SelectListItem
+            WebminarVM webminarVM = new()
             {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            });
-
-            ViewData["CityList"] = CityList;
-
-            IEnumerable <SelectListItem> LectureList = _unitOfWork.Lecture.GetAll().Select(y => new SelectListItem
-            {
-                Text = y.Name,
-                Value = y.Id.ToString()
-            });
-
-            ViewData["LectureList"] = LectureList;
-            return View();
+                CityList = _unitOfWork.City.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                LectureList = _unitOfWork.Lecture.GetAll().Select(y => new SelectListItem
+                {
+                    Text = y.Name,
+                    Value = y.Id.ToString()
+                }),
+                Webminar = new Webminar()
+            };
+            return View(webminarVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Webminar webminar)
+        public IActionResult Create(WebminarVM obj)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Webminar.Add(webminar);
+                _unitOfWork.Webminar.Add(obj.Webminar);
                 _unitOfWork.Save();
                 TempData["success"] = "Уебминара е създаден успешно!";
                 return RedirectToAction("Index");
@@ -65,40 +65,6 @@ namespace RightPath.Areas.Admin.Controllers
 
         }
 
-        //private string UploadeFile(WebminarImage webminar)
-
-        //{
-
-        //    string uniqueFileName = null;
-
-        //    if (webminar.WebminarLogo!= null)
-        //    {
-
-        //        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
-
-        //        uniqueFileName = Guid.NewGuid().ToString() + "_" + webminar.WebminarLogo.FileName;
-
-        //        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        //        Console.WriteLine(filePath);
-
-
-
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-
-        //        {
-
-        //            webminar.WebminarLogo.CopyTo(fileStream);
-
-        //        }
-
-        //    }
-
-        //    return uniqueFileName;
-
-        //}
-
-        // GET: Webminars/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
