@@ -17,10 +17,12 @@ namespace RightPath.Areas.Admin.Controllers
     public class WebminarsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public WebminarsController(IUnitOfWork unitOfWork)
+        public WebminarsController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Webminars
@@ -47,6 +49,7 @@ namespace RightPath.Areas.Admin.Controllers
                 }),
                 Webminar = new Webminar()
             };
+
             if(id == null || id == 0)
             {
                 //functionality for create
@@ -61,12 +64,44 @@ namespace RightPath.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Upsert(WebminarVM obj, IFormFile? file)
+        public IActionResult Upsert(WebminarVM webminarVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Webminar.Add(obj.Webminar);
+                string wwwRoothPath = _webHostEnvironment.WebRootPath;
+                if(file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRoothPath, @"Images");
+
+                    if (!string.IsNullOrEmpty(webminarVM.Webminar.Logo))
+                    {
+                        //delete old image logic
+                        var oldImagePath = Path.Combine(wwwRoothPath, webminarVM.Webminar.Logo.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    webminarVM.Webminar.Logo = @"\Images\" + fileName;
+                }
+
+                if(webminarVM.Webminar.Id == 0)
+                {
+                    _unitOfWork.Webminar.Add(webminarVM.Webminar);
+                }
+                else
+                {
+                    _unitOfWork.Webminar.Update(webminarVM.Webminar);
+                }
+                _unitOfWork.Webminar.Add(webminarVM.Webminar);
                 _unitOfWork.Save();
                 TempData["success"] = "Уебминара е създаден успешно!";
                 return RedirectToAction("Index");
@@ -74,35 +109,6 @@ namespace RightPath.Areas.Admin.Controllers
             return View();
 
         }
-
-        //public IActionResult Edit(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    Webminar? webminarFromDb = _unitOfWork.Webminar.Get(u => u.Id == id);
-        //    if (webminarFromDb == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(webminarFromDb);
-        //}
-
-        //// POST: Webminars/Edit/5
-        //[HttpPost]
-        //public IActionResult Edit(Webminar webminar)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _unitOfWork.Webminar.Update(webminar);
-        //        _unitOfWork.Save();
-        //        TempData["success"] = "Уебминара е обновен успешно!";
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(webminar);
-        //}
 
         // GET: Webminars/Delete/5
         public IActionResult Delete(int? id)

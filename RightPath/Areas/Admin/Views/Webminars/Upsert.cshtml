@@ -4,8 +4,10 @@
 <hr />
 <div class="row justify-content-center">
     <div class="col-10">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Upsert" enctype="multipart/form-data">
             <input asp-for="Webminar.Id" hidden />
+            <input asp-for="Webminar.Logo" hidden />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group py-1">
                 <label asp-for="Webminar.Title" class="control-label"></label>
@@ -45,19 +47,19 @@
             </div>
             <div class="form-group py-1">
                 <label asp-for="Webminar.Logo" class="control-label"></label>
-                <input type="file" class="form-control border-0 shadow" />
+                <input type="file" name="file" class="form-control border-0 shadow" />
             </div>
             <div class="row pt-3">
-                <div class="col-6 col-md-1">
+                <div class="col-6 col-md-3">
                     @if(Model.Webminar.Id != 0)
                     {
-                        <button type="submit" value="Create" class="btn btn-primary btn-md">
+                        <button type="submit" class="btn btn-primary btn-md form-control">
                             Update
                         </button>
                     }
                     else
                     {
-                        <button type="submit" value="Create" class="btn btn-primary btn-md">
+                        <button type="submit" class="btn btn-primary btn-md form-control">
                             Create
                         </button>
                     }
@@ -69,7 +71,7 @@
         </form>
     </div>
     <div class="col-2">
-        <img id="courseLogo" src="~/Images/@Model.Webminar.Logo" width="100%" alt="LectureProfilePicture"
+        <img src="~/Images/@Model.Webminar.Logo" width="100%"
              style="border-radius:5px; border:1px solid #bbb9b9;" />
     </div>
 </div>
