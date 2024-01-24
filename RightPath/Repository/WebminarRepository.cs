@@ -29,12 +29,6 @@ namespace RightPath.Repository
                 {
                     objFormDb.Logo = obj.Logo;
                 }
-
-
-
-
-
-
             }
         }
     }

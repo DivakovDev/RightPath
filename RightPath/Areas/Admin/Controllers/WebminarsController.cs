@@ -28,7 +28,7 @@ namespace RightPath.Areas.Admin.Controllers
         // GET: Webminars
         public IActionResult Index()
         {
-            List<Webminar> objCityList = _unitOfWork.Webminar.GetAll().ToList();
+            List<Webminar> objCityList = _unitOfWork.Webminar.GetAll(includeProperties: "City,Lecture").ToList();
             return View(objCityList);
         }
 
