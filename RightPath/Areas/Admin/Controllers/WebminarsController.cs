@@ -72,7 +72,7 @@ namespace RightPath.Areas.Admin.Controllers
                 if(file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string productPath = Path.Combine(wwwRoothPath, @"Images");
+                    string productPath = Path.Combine(wwwRoothPath, @"images\products");
 
                     if (!string.IsNullOrEmpty(webminarVM.Webminar.Logo))
                     {
@@ -90,20 +90,20 @@ namespace RightPath.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    webminarVM.Webminar.Logo = @"\Images\" + fileName;
+                    webminarVM.Webminar.Logo = @"\images\products\" + fileName;
                 }
 
                 if(webminarVM.Webminar.Id == 0)
                 {
                     _unitOfWork.Webminar.Add(webminarVM.Webminar);
+                    TempData["success"] = "Уебминара е създаден успешно!";
                 }
                 else
                 {
                     _unitOfWork.Webminar.Update(webminarVM.Webminar);
+                    TempData["success"] = "Уебминара е редактиран успешно!";
                 }
-                _unitOfWork.Webminar.Add(webminarVM.Webminar);
                 _unitOfWork.Save();
-                TempData["success"] = "Уебминара е създаден успешно!";
                 return RedirectToAction("Index");
             }
             return View();

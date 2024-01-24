@@ -1,78 +1,93 @@
 ﻿@model WebminarVM;
 
-<h1>@(Model.Webminar.Id != 0 ? "Редактирай" : "Създай") Уебминар</h1>
-<hr />
-<div class="row justify-content-center">
-    <div class="col-10">
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-dark py-2"> @(Model.Webminar.Id != 0 ? "Редактирай" : "Създай") Уебминар</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
         <form asp-action="Upsert" enctype="multipart/form-data">
             <input asp-for="Webminar.Id" hidden />
             <input asp-for="Webminar.Logo" hidden />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group py-1">
-                <label asp-for="Webminar.Title" class="control-label"></label>
-                <input asp-for="Webminar.Title" class="form-control" />
-                <span asp-validation-for="Webminar.Title" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="Webminar.Description" class="control-label"></label>
-                <input asp-for="Webminar.Description" class="form-control" />
-                <span asp-validation-for="Webminar.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="Webminar.StartDate" class="control-label"></label>
-                <input type="date" asp-for="Webminar.StartDate" class="form-control" />
-                <span asp-validation-for="Webminar.StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="Webminar.CityId" class="control-label ms-2"></label>
-                <select asp-for="@Model.Webminar.CityId" asp-items="@Model.CityList" class="form-select">
-                    <option disabled selected>--Избери Град--</option>
-                </select>
-                <span asp-validation-for="Webminar.CityId" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="Webminar.Lecture1Id" class="control-label"></label>
-                <select asp-for="@Model.Webminar.Lecture1Id" asp-items="@Model.LectureList" class="form-select">
-                    <option disabled selected>--Избери Водещ Лектор--</option>
-                </select>
-                <span asp-validation-for="Webminar.Lecture1Id" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="Webminar.Lecture2Id" class="control-label"></label>
-                <select asp-for="@Model.Webminar.Lecture2Id" asp-items="@Model.LectureList" class="form-select">
-                    <option disabled selected>--Избери Лектор Помощник--</option>
-                </select>
-                <span asp-validation-for="Webminar.Lecture2Id" class="text-danger"></span>
-            </div>
-            <div class="form-group py-1">
-                <label asp-for="Webminar.Logo" class="control-label"></label>
-                <input type="file" name="file" class="form-control border-0 shadow" />
-            </div>
-            <div class="row pt-3">
-                <div class="col-6 col-md-3">
-                    @if(Model.Webminar.Id != 0)
+            <div class="row">
+                <div class="col-10">
+                    <div class="form-group py-1">
+                        <label asp-for="Webminar.Title" class="control-label"></label>
+                        <input asp-for="Webminar.Title" class="form-control" />
+                        <span asp-validation-for="Webminar.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Webminar.Description" class="control-label"></label>
+                        <input asp-for="Webminar.Description" class="form-control" />
+                        <span asp-validation-for="Webminar.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Webminar.StartDate" class="control-label"></label>
+                        <input type="date" asp-for="Webminar.StartDate" class="form-control" />
+                        <span asp-validation-for="Webminar.StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Webminar.CityId" class="control-label ms-2"></label>
+                        <select asp-for="@Model.Webminar.CityId" asp-items="@Model.CityList" class="form-select">
+                            <option disabled selected>--Избери Град--</option>
+                        </select>
+                        <span asp-validation-for="Webminar.CityId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Webminar.Lecture1Id" class="control-label"></label>
+                        <select asp-for="@Model.Webminar.Lecture1Id" asp-items="@Model.LectureList" class="form-select">
+                            <option disabled selected>--Избери Водещ Лектор--</option>
+                        </select>
+                        <span asp-validation-for="Webminar.Lecture1Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Webminar.Lecture2Id" class="control-label"></label>
+                        <select asp-for="@Model.Webminar.Lecture2Id" asp-items="@Model.LectureList" class="form-select">
+                            <option disabled selected>--Избери Лектор Помощник--</option>
+                        </select>
+                        <span asp-validation-for="Webminar.Lecture2Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Webminar.Logo" class="control-label"></label>
+                        <input type="file" name="file" class="form-control border-0 shadow" />
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-6 col-md-3">
+                            @if (Model.Webminar.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary btn-md form-control">
+                                    Update
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary btn-md form-control">
+                                    Create
+                                </button>
+                            }
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    @if (Model.Webminar.Logo == null)
                     {
-                        <button type="submit" class="btn btn-primary btn-md form-control">
-                            Update
-                        </button>
+                        <p>Все още не сте избрали снимка!</p>
                     }
                     else
                     {
-                        <button type="submit" class="btn btn-primary btn-md form-control">
-                            Create
-                        </button>
+                        <img src="@Model.Webminar.Logo" width="100%" alt="Webminar Logo"
+                            style="border-radius:5px; border:1px solid #bbb9b9;" />
                     }
-                </div>
-                <div class ="col-6 col-md-3">
-                    <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
                 </div>
             </div>
         </form>
-    </div>
-    <div class="col-2">
-        <img src="~/Images/@Model.Webminar.Logo" width="100%"
-             style="border-radius:5px; border:1px solid #bbb9b9;" />
     </div>
 </div>
 
