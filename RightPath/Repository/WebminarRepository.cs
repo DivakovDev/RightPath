@@ -13,9 +13,29 @@ namespace RightPath.Repository
             _context = context;
         }
 
+        //We have update because we update manually every things without issues
         public void Update(Webminar obj)
         {
-            _context.Webminars.Update(obj);
+            var objFormDb = _context.Webminars.FirstOrDefault(u => u.Id == obj.Id);
+            if (objFormDb != null)
+            {
+                objFormDb.Title = obj.Title;
+                objFormDb.Description = obj.Description;
+                objFormDb.StartDate = obj.StartDate;
+                objFormDb.CityId= obj.CityId;
+                objFormDb.Lecture1Id= obj.Lecture1Id;
+                objFormDb.Lecture2Id = obj.Lecture2Id;
+                if(obj.Logo != null)
+                {
+                    objFormDb.Logo = obj.Logo;
+                }
+
+
+
+
+
+
+            }
         }
     }
 }
