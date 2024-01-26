@@ -1,54 +1,53 @@
-﻿<form method="post">
+﻿@model Webminar
+
+<form method="post">
     <div class="card shadow border-0 mt-4">
         <div class="card-header bg-secondary bg-gradient text-light py-4">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h3 class="text-white text-uppercase">Title</h3>
-                    <p class="text-white-50 fw-semibold mb-0">by Author</p>
+                    <h3 class="text-dark text-uppercase">@Model.Title</h3>
+                    <p class="text-dark fw-semibold mb-0">със @Model.Lecture.Name</p>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <div class="py-3">
-                <div class="row">
-                    <div class="col-6 col-md-2 offset-lg-1 pb-1">
-                        <a class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
-                            <small>Back to home</small>
-                        </a>
-                    </div>
+            <div class="py-3 mx-5 d-flex justify-content-between">
+                <div class="col-6 col-md-2">
+                    <a asp-action="Index" class="btn btn-outline-primary mb-5 fw-semibold btn-sm text-uppercase">
+                        <small>Обратно в Началото</small>
+                    </a>
                 </div>
+                <div class="col-6 col-md-2">
+                    <button type="submit" disabled class="btn btn-success mb-5 fw-semibold btn-sm text-uppercase">
+                        Добави в Любими
+                    </button>
+                </div>
+            </div>
                 <div class="row">
                     <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
-                        <img src="https://placehold.co/500x600" width="100%" class="rounded" />
+                        <img src="@Model.Logo" width="100%" class="rounded" />
                     </div>
-                    <div class="col-12 col-lg-6 offset-lg-1">
+                    <div class="description-container col-12 col-lg-6 offset-lg-1 d-flex flex-column justify-content-between" style="height:350px">
+                        <div>
+                            <div class="col-12 col-md-6">
+                                <h5 class="text-secondary" style="text-decoration-line: underline; text-underline-offset: 3px;">Дата</h5>
+                                <p>@Model.StartDate.ToString("dd-MM-yyyy")г.</p>
+                            </div>
 
-                        <div class="col-12 col-md-6 pb-4">
-                            <span class="badge text-dark">Webminar Name</span>
-                        </div>
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50 ">Webminar Lectures</h6>
-                        </div>
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50  pb-2">
-                                Start Date:
-                            </h6>
-                        </div>
-                        
-                        <div class="row pl-2 my-3">
-                            <p class="text-secondary lh-sm">Description</p>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-12 col-md-6 pb-1">
-                                <button type="submit" disabled
-                                        class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
-                                    Add to Cart (Comming Soon...)
-                                </button>
+                            <div class="row my-1">
+                                <h5 class="text-secondary" style="text-decoration-line: underline; text-underline-offset: 3px;">Описание</h5>
+                                <p>@Model.Description</p>
+                            </div>
+                            <div class="row my-1">
+                                <h5 class="text-secondary" style="text-decoration-line: underline; text-underline-offset: 3px;">Лектори</h5>
+                                <p>@Model.Lecture.Name</p>
+                            </div>
+                            <div class="col my-1">
+                                <h5 class="text-secondary" style="text-decoration-line: underline; text-underline-offset: 3px;">Град</h5>
+                                <p class="block">@Model.City.Name</p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
