@@ -39,12 +39,6 @@ namespace RightPath.Models
         public int Lecture1Id { get; set; }
         [ForeignKey("Lecture1Id")]
         [ValidateNever]
-
-        [Required(ErrorMessage = "Помощник лектора е задължителен!")]
-        [DisplayName("Помощник Лектор")]
-        public int Lecture2Id { get; set; }
-        [ForeignKey("Lecture2Id")]
-        [ValidateNever]
         public Lecture Lecture { get; set; }
 
         //Relation for Webminar

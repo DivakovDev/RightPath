@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RightPath.Migrations
 {
     /// <inheritdoc />
-    public partial class dbinitilize : Migration
+    public partial class DbInitialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -195,15 +195,14 @@ namespace RightPath.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<double>(type: "float", nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture1Id = table.Column<int>(type: "int", nullable: false),
-                    Lecture2Id = table.Column<int>(type: "int", nullable: false)
+                    Lecture1Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Lectures_Lecture2Id",
-                        column: x => x.Lecture2Id,
+                        name: "FK_Courses_Lectures_Lecture1Id",
+                        column: x => x.Lecture1Id,
                         principalTable: "Lectures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -220,8 +219,7 @@ namespace RightPath.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture1Id = table.Column<int>(type: "int", nullable: false),
-                    Lecture2Id = table.Column<int>(type: "int", nullable: false)
+                    Lecture1Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -233,8 +231,8 @@ namespace RightPath.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Webminars_Lectures_Lecture2Id",
-                        column: x => x.Lecture2Id,
+                        name: "FK_Webminars_Lectures_Lecture1Id",
+                        column: x => x.Lecture1Id,
                         principalTable: "Lectures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -280,9 +278,9 @@ namespace RightPath.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_Lecture2Id",
+                name: "IX_Courses_Lecture1Id",
                 table: "Courses",
-                column: "Lecture2Id");
+                column: "Lecture1Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Webminars_CityId",
@@ -290,9 +288,9 @@ namespace RightPath.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Webminars_Lecture2Id",
+                name: "IX_Webminars_Lecture1Id",
                 table: "Webminars",
-                column: "Lecture2Id");
+                column: "Lecture1Id");
         }
 
         /// <inheritdoc />

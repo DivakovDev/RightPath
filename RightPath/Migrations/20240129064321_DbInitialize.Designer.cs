@@ -12,15 +12,15 @@ using RightPath.Data;
 namespace RightPath.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240123074431_dbinitilize")]
-    partial class dbinitilize
+    [Migration("20240129064321_DbInitialize")]
+    partial class DbInitialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -266,9 +266,6 @@ namespace RightPath.Migrations
                     b.Property<int>("Lecture1Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Lecture2Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -279,7 +276,7 @@ namespace RightPath.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Lecture2Id");
+                    b.HasIndex("Lecture1Id");
 
                     b.ToTable("Courses");
                 });
@@ -327,9 +324,6 @@ namespace RightPath.Migrations
                     b.Property<int>("Lecture1Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Lecture2Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -345,7 +339,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("Lecture2Id");
+                    b.HasIndex("Lecture1Id");
 
                     b.ToTable("Webminars");
                 });
@@ -405,7 +399,7 @@ namespace RightPath.Migrations
                 {
                     b.HasOne("RightPath.Models.Lecture", "Lecture")
                         .WithMany()
-                        .HasForeignKey("Lecture2Id")
+                        .HasForeignKey("Lecture1Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -422,7 +416,7 @@ namespace RightPath.Migrations
 
                     b.HasOne("RightPath.Models.Lecture", "Lecture")
                         .WithMany()
-                        .HasForeignKey("Lecture2Id")
+                        .HasForeignKey("Lecture1Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -24,7 +24,6 @@ namespace RightPath.Repository
                 objFormDb.StartDate = obj.StartDate;
                 objFormDb.CityId= obj.CityId;
                 objFormDb.Lecture1Id= obj.Lecture1Id;
-                objFormDb.Lecture2Id = obj.Lecture2Id;
                 if(obj.Logo != null)
                 {
                     objFormDb.Logo = obj.Logo;

@@ -57,8 +57,7 @@ namespace RightPath.Data
                                 Description= "You will learn how to be full stack developer from the basics!",
                                 Duration = 12.30,
                                 Logo = "lecture1.png",
-                                Lecture1Id = 1,
-                                Lecture2Id = 2,
+                                Lecture1Id = 1
 
                             },
                             new Course()
@@ -67,8 +66,7 @@ namespace RightPath.Data
                                 Description= "You will learn how to be back end developer from the basics!",
                                 Duration = 11.30,
                                 Logo = "lecture1.png",
-                                Lecture1Id = 3,
-                                Lecture2Id = 2,
+                                Lecture1Id = 3
 
                             },
                         });
@@ -123,8 +121,7 @@ namespace RightPath.Data
                                 StartDate = new DateTime(2023, 12, 24),
                                 CityId = 1,
                                 Logo = "lecture1.png",
-                                Lecture1Id = 3,
-                                Lecture2Id = 2
+                                Lecture1Id = 3
 
                             },
                             new Webminar()
@@ -134,8 +131,7 @@ namespace RightPath.Data
                                 StartDate = new DateTime(2023, 12, 24),
                                 CityId = 1,
                                 Logo = "lecture1.png",
-                                Lecture1Id = 1,
-                                Lecture2Id = 3
+                                Lecture1Id = 1
 
                             },
                             new Webminar()
@@ -145,8 +141,7 @@ namespace RightPath.Data
                                 StartDate = new DateTime(2023, 12, 24),
                                 CityId = 1,
                                 Logo = "lecture1.png",
-                                Lecture1Id = 1,
-                                Lecture2Id = 2
+                                Lecture1Id = 1
 
                             },
                         });
