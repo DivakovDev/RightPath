@@ -7,6 +7,8 @@
 
         ILectureRepository Lecture { get; }
 
+        ICourseRepository Course { get; }
+
         void Save();
     }
 }

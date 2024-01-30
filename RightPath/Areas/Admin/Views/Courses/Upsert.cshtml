@@ -1,0 +1,84 @@
+﻿@model CourseVM;
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-dark py-2"> @(Model.Course.Id != 0 ? "Редактирай" : "Създай") Уебминар</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form asp-action="Upsert" enctype="multipart/form-data">
+            <input asp-for="Course.Id" hidden />
+            <input asp-for="Course.Logo" hidden />
+
+            <div class="row">
+                <div class="col-10">
+                    <div class="form-group py-1">
+                        <label asp-for="Course.Title" class="control-label"></label>
+                        <input asp-for="Course.Title" class="form-control" />
+                        <span asp-validation-for="Course.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Course.Description" class="control-label"></label>
+                        <input asp-for="Course.Description" class="form-control" />
+                        <span asp-validation-for="Course.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Course.Duration" class="control-label"></label>
+                        <input type="date" asp-for="Course.Duration" class="form-control" />
+                        <span asp-validation-for="Course.Duration" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Course.Lecture1Id" class="control-label"></label>
+                        <select asp-for="@Model.Course.Lecture1Id" asp-items="@Model.LectureList" class="form-select">
+                            <option disabled selected>--Избери Водещ Лектор--</option>
+                        </select>
+                        <span asp-validation-for="Course.Lecture1Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="Course.Logo" class="control-label"></label>
+                        <input type="file" name="file" class="form-control border-0 shadow" />
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-6 col-md-3">
+                            @if (Model.Course.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary btn-md form-control">
+                                    Update
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary btn-md form-control">
+                                    Create
+                                </button>
+                            }
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-link btn-md" asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    @if (Model.Course.Logo == null)
+                    {
+                        <p>Все още не сте избрали снимка!</p>
+                    }
+                    else
+                    {
+                        <img src="@Model.Course.Logo" width="100%" alt="Course Logo"
+                             style="border-radius:5px; border:1px solid #bbb9b9;" />
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,78 @@
+﻿@using RightPath.Models;
+@model IEnumerable<RightPath.Models.Course>
+
+<partial name="_Notification" />
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">Списък от Курсове</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Course" asp-action="Upsert" class="btn btn-primary shadow">
+                    <i class="bi bi-plus-circle"></i> Създай нов Курс
+                </a>
+            </div>
+        </div>
+        <table id="tblData" class="table table-custom table-striped table-bordered">
+            <thead>
+                <tr class="text-nowrap">
+                    <th>
+                        Име
+                    </th>
+                    <th>
+                        Описание
+                    </th>
+                    <th>
+                        Дата
+                    </th>
+                    <th>
+                        Лектор
+                    </th>
+                    <th>
+                        Лого
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="font-size: smaller;">
+                        <td>
+                            @item.Title
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @item.Duration.ToString("dd-MM-yyyy")
+                        </td>
+                        <td>
+                            @item.Lecture.Name
+                        </td>
+                        <td>
+                            @item.Logo
+                        </td>
+                        <td>
+                            <div class="btn-group badge" role="group">
+                                <a asp-controller="Course" asp-action="Upsert" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
+                                    <i class="bi bi-pencil-square"></i> Редактирай
+                                </a>
+                                <a asp-controller="Course" asp-action="Delete" asp-route-id="@item.Id" class="w-8 shadow btn btn-danger mx-2 px-3">
+                                    <i class="bi bi-trash-fill"></i> Изтрий
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
