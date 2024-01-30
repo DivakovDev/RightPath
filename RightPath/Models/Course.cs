@@ -25,7 +25,7 @@ namespace RightPath.Models
         [Required(ErrorMessage = "Корицата е задължителна!")]
         [DisplayName("Корица на Курса")]
         public string Logo { get; set; }
-
+        [DisplayName("Лектор")]
         public int Lecture1Id { get; set; }
         [ForeignKey("Lecture1Id")]
         [ValidateNever]

@@ -15,7 +15,7 @@
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="Course" asp-action="Upsert" class="btn btn-primary shadow">
+                <a asp-controller="Courses" asp-action="Upsert" class="btn btn-primary shadow">
                     <i class="bi bi-plus-circle"></i> Създай нов Курс
                 </a>
             </div>
@@ -30,7 +30,7 @@
                         Описание
                     </th>
                     <th>
-                        Дата
+                        Времетраене
                     </th>
                     <th>
                         Лектор
@@ -52,7 +52,7 @@
                             @item.Description
                         </td>
                         <td>
-                            @item.Duration.ToString("dd-MM-yyyy")
+                            @item.Duration
                         </td>
                         <td>
                             @item.Lecture.Name
@@ -62,10 +62,10 @@
                         </td>
                         <td>
                             <div class="btn-group badge" role="group">
-                                <a asp-controller="Course" asp-action="Upsert" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
+                                <a asp-controller="Courses" asp-action="Upsert" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
                                     <i class="bi bi-pencil-square"></i> Редактирай
                                 </a>
-                                <a asp-controller="Course" asp-action="Delete" asp-route-id="@item.Id" class="w-8 shadow btn btn-danger mx-2 px-3">
+                                <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.Id" class="w-8 shadow btn btn-danger mx-2 px-3">
                                     <i class="bi bi-trash-fill"></i> Изтрий
                                 </a>
                             </div>

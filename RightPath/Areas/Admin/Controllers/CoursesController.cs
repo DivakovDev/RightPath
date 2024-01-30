@@ -14,12 +14,12 @@ using RightPath.Repository.IRepository;
 namespace RightPath.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CourseController : Controller
+    public class CoursesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CourseController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        public CoursesController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
