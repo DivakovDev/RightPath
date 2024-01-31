@@ -21,5 +21,7 @@ namespace RightPath.Data
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Webminar> Webminars{ get; set; }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
     }
 }

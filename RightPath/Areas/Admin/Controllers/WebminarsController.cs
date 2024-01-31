@@ -10,10 +10,12 @@ using RightPath.Models.ViewModel;
 using RightPath.Data;
 using RightPath.Models;
 using RightPath.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RightPath.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetail.Role_Admin)]
     public class WebminarsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

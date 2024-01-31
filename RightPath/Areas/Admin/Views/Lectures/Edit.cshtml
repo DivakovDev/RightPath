@@ -32,8 +32,16 @@
         </form>
     </div>
     <div class="col-2">
-        <img id="profilePicture" src="~/Images/@Model.ProfileImage" width="100%" alt="LectureProfilePicture"
-             style="border-radius:5px; border:1px solid #bbb9b9;" />
+        @if (Model.ProfileImage == null)
+        {
+            <p>Все още не сте избрали снимка!</p>
+        }
+        else
+        {
+            <img id="profilePicture" src="@Model.ProfileImage" width="100%" alt="Lecture Profile Picture"
+                 style="border-radius:5px; border:1px solid #bbb9b9;" />
+        }
+
     </div>
 </div>
 
