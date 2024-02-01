@@ -2,88 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RightPath.Models.ViewModel;
 using RightPath.Data;
 using RightPath.Models;
 using RightPath.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
-namespace RightPath.Controllers
+namespace RightPath.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = StaticDetail.Role_Admin)]
     public class LecturesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public LecturesController(IUnitOfWork unitOfWork)
+        public LecturesController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: Cities
+        // GET: Webminars
         public IActionResult Index()
         {
             List<Lecture> objLectureList = _unitOfWork.Lecture.GetAll().ToList();
             return View(objLectureList);
         }
 
-        // GET: Cities/Create
-        public IActionResult Create()
+        // GET: Webminars/Create
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            LectureVM lectureVM = new()
+            {
+                Lecture = new Lecture()
+            };
+
+            if (id == null || id == 0)
+            {
+                //functionality for create
+                return View(lectureVM);
+            }
+            else
+            {
+                //functionality for edit
+                lectureVM.Lecture = _unitOfWork.Lecture.Get(u => u.Id == id);
+                return View(lectureVM);
+            }
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Lecture lecture)
+        public IActionResult Upsert(LectureVM lectureVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Lecture.Add(lecture);
+                string wwwRoothPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRoothPath, @"images\products");
+
+                    if (!string.IsNullOrEmpty(lectureVM.Lecture.ProfileImage))
+                    {
+                        //delete old image logic
+                        var oldImagePath = Path.Combine(wwwRoothPath, lectureVM.Lecture.ProfileImage.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    lectureVM.Lecture.ProfileImage = @"\images\products\" + fileName;
+                }
+
+                if (lectureVM.Lecture.Id == 0)
+                {
+                    _unitOfWork.Lecture.Add(lectureVM.Lecture);
+                    TempData["success"] = "Лектора е създаден успешно!";
+                }
+                else
+                {
+                    _unitOfWork.Lecture.Update(lectureVM.Lecture);
+                    TempData["success"] = "Лектора е редактиран успешно!";
+                }
                 _unitOfWork.Save();
-                TempData["success"] = "Лектора е създаден успешно!";
                 return RedirectToAction("Index");
             }
             return View();
+
         }
 
-        // GET: Cities/Edit/5
-        public IActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Lecture? lecture = _unitOfWork.Lecture.Get(u => u.Id == id);
-
-            if (lecture == null)
-            {
-                return NotFound();
-            }
-            return View(lecture);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Lecture lecture)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Lecture.Update(lecture);
-                _unitOfWork.Save();
-                TempData["success"] = "Детайлите по лектора са променени успешно!";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
-
-        // GET: Cities/Delete/5
+        // GET: Webminars/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -101,7 +120,7 @@ namespace RightPath.Controllers
             return View(lectureFromDb);
         }
 
-        // POST: Cities/Delete/5
+        // POST: Webminars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
@@ -113,10 +132,8 @@ namespace RightPath.Controllers
             }
             _unitOfWork.Lecture.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Лекторът е изтрит успешно!";
+            TempData["success"] = "Уебминара е изтрит успешно!";
             return RedirectToAction("Index");
         }
     }
-
 }
-

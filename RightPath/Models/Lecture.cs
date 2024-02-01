@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Models
@@ -18,14 +19,8 @@ namespace RightPath.Models
 
         [Required(ErrorMessage = "Профилната снимка е задължителна!")]
         [DisplayName("Профилна Снимка")]
+        [ValidateNever]
         public string ProfileImage { get; set; }
-
-        ////Realtion for Course
-        //public List<Course_Lector> Courses_Lectures { get; set; }
-
-
-        ////Relation for Webminar
-        //public List<Webminar_Lector> Webminars_Lectures { get; set; }
 
 
 

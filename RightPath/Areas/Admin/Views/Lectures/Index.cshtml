@@ -15,7 +15,7 @@
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-action="Create" class="btn btn-primary shadow">
+                <a asp-controller="Lectures" asp-action="Upsert" class="btn btn-primary shadow">
                     <i class="bi bi-plus-circle"></i> Добавяне на Лектор
                 </a>
             </div>
@@ -34,17 +34,21 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Description</td>
-                        <td alt="Profile Image" style="width: 50px; height: 50px; object-fit: cover;">
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
                             @item.ProfileImage
                         </td>
                         <td>
                             <div class="d-flex justify-content-center" role="group">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
+                                <a asp-controller="Lectures" asp-action="Upsert" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
                                     <i class="bi bi-pencil-square"></i> Редактиране
                                 </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="shadow btn btn-danger mx-2 px-3">
+                                <a asp-controller="Lectures" asp-action="Delete" asp-route-id="@item.Id" class="shadow btn btn-danger mx-2 px-3">
                                     <i class="bi bi-trash-fill"></i> Изтрий
                                 </a>
                             </div>
