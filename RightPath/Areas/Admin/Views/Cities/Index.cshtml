@@ -23,10 +23,10 @@
             <thead>
                 <tr>
                     <th>
-                        City Name
+                        Име на Град
                     </th>
                     <th>
-                        Display Order
+                        Номер
                     </th>
                 </tr>
             </thead>
@@ -34,10 +34,10 @@
                 @foreach (var item in Model) {
                     <tr>
                         <td>
-                           @Html.DisplayFor(modelItem => item.Name)
+                           @item.Name
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DisplayOrder)
+                            @item.DisplayOrder
                         </td>
                         <td>
                             <div class="d-flex justify-content-center" role="group">
