@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RightPath.Models;
+using RightPath.Models.ViewModel;
 using RightPath.Repository.IRepository;
 using System.Diagnostics;
 
@@ -19,15 +20,37 @@ namespace RightPath.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Webminar> webminarList = _unitOfWork.Webminar.GetAll(includeProperties: "City,Lecture");
-            return View(webminarList);
+            var viewModel = new HomeViewModel
+            {
+                Webminars = GetWebminars(), 
+                Courses = GetCourses()
+            };
+            return View(viewModel);
         }
 
-        public IActionResult Details(int webminarId)
+        private IEnumerable<Webminar> GetWebminars()
+        {
+            IEnumerable<Webminar> webminarList = _unitOfWork.Webminar.GetAll(includeProperties: "City,Lecture");
+            return (webminarList);
+        }
+
+        private IEnumerable<Course> GetCourses()
+        {
+            IEnumerable<Course> courseList = _unitOfWork.Course.GetAll(includeProperties: "Lecture");
+            return (courseList);
+        }
+
+        public IActionResult WebminarDetails(int webminarId)
         {
             Webminar webminar = _unitOfWork.Webminar.Get(u => u.Id == webminarId, includeProperties: "City,Lecture");
             return View(webminar);
         }
+        public IActionResult CourseDetails(int courseId)
+        {
+            Course course = _unitOfWork.Course.Get(u => u.Id == courseId, includeProperties: "Lecture");
+            return View(course);
+        }
+
 
         public IActionResult Privacy()
         {

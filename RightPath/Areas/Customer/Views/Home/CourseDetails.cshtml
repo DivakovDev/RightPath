@@ -1,0 +1,51 @@
+﻿@model Course
+
+<form method="post">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient text-light py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="text-dark text-uppercase">@Model.Title</h3>
+                    <p class="text-dark fw-semibold mb-0">със @Model.Lecture.Name</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="py-3 mx-5 d-flex justify-content-between">
+                <div class="col-6 col-md-2">
+                    <a asp-action="Index" class="btn btn-outline-primary mb-5 fw-semibold btn-sm text-uppercase">
+                        <small>Обратно в Началото</small>
+                    </a>
+                </div>
+                <div class="col-6 col-md-2">
+                    <button type="submit" disabled class="btn btn-success mb-5 fw-semibold btn-sm text-uppercase">
+                        Добави в Любими
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
+                    <img src="@Model.Logo" width="100%" class="rounded" />
+                </div>
+                <div class="description-container col-12 col-lg-6 offset-lg-1 d-flex flex-column justify-content-between" style="height:350px">
+                    <div>
+                        <div class="col-12 col-md-6">
+                            <h5 class="text-secondary" style="text-decoration-line: underline; text-underline-offset: 3px;">Дата</h5>
+                            <p>@Model.Duration.ToString("dd-MM-yyyy")г.</p>
+                        </div>
+
+                        <div class="row my-1">
+                            <h5 class="text-secondary" style="text-decoration-line: underline; text-underline-offset: 3px;">Описание</h5>
+                            <p>@Model.Description</p>
+                        </div>
+                        <div class="row my-1">
+                            <h5 class="text-secondary" style="text-decoration-line: underline; text-underline-offset: 3px;">Лектори</h5>
+                            <p>@Model.Lecture.Name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
