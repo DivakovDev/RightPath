@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RightPath.Models
 {
-    public class Course
+    public class Course : IProduct
     {
         [Key]
         public int Id { get; set; }

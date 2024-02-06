@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RightPath.Models
 {
-    public class Webminar
+    public class Webminar : IProduct
     {
         [Key]
         public int Id { get; set; }
