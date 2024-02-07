@@ -47,7 +47,7 @@ namespace RightPath.Areas.Customer.Controllers
         }
         public IActionResult CourseDetails(int courseId)
         {
-            Course course = _unitOfWork.Course.Get(u => u.Id == courseId, includeProperties: "Lecture");
+            Course course = _unitOfWork.Course.Get(y => y.Id == courseId, includeProperties: "Lecture");
             return View(course);
         }
 

@@ -21,6 +21,8 @@ namespace RightPath.Repository
             this.dbSet = _context.Set<T>();
             //Here is logic about showing cities and lectures Names
             _context.Webminars.Include(u => u.City).Include(y => y.Lecture);
+            _context.Courses.Include(y => y.Lecture);
+
         }
         public void Add(T entity)
         {
@@ -39,7 +41,8 @@ namespace RightPath.Repository
                     query = query.Include(includeProp);
                 }
             }
-            return query.FirstOrDefault();
+            var result = query.FirstOrDefault();
+            return result;
         }
 
         public IEnumerable<T> GetAll(string? includeProperties = null)

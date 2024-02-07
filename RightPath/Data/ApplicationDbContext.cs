@@ -17,6 +17,7 @@ namespace RightPath.Data
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<City> Cities { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts {get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Webminar> Webminars{ get; set; }

@@ -1,13 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RightPath.Models
 {
     public class ShoppingCart
     {
         public int Id { get; set; }
-        [ForeignKey("UserId")]
+
+        public List<Webminar> Webminars { get; set; }
+
+        public List<Course> Courses { get; set; }
+
+        public string ApplicationUserId{ get; set; }
+        [ForeignKey("ApplicationUserId")]
+        [ValidateNever]
         public ApplicationUser User { get; set; }
-        List<IProduct> Products { get; set; }
-        public string UserId{ get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RightPath.Models
 {
-    public class Webminar : IProduct
+    public class Webminar
     {
         [Key]
         public int Id { get; set; }
@@ -36,13 +36,12 @@ namespace RightPath.Models
 
         [Required(ErrorMessage = "Водещият Лектор е задължителен!")]
         [DisplayName("Водещ Лектор")]
-        public int Lecture1Id { get; set; }
-        [ForeignKey("Lecture1Id")]
+        public int LectureId { get; set; }
+        [ForeignKey("LectureId")]
         [ValidateNever]
         public Lecture Lecture { get; set; }
 
-        //Relation for Webminar
-        //public List<Webminar_Lector> Webminars_Lectures { get; set; }
 
+        public List<ShoppingCart> Carts { get; set; } = new List<ShoppingCart>();
     }
 }

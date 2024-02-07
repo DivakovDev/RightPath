@@ -22,6 +22,21 @@ namespace RightPath.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CourseShoppingCart", b =>
+                {
+                    b.Property<int>("CartsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoursesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartsId", "CoursesId");
+
+                    b.HasIndex("CoursesId");
+
+                    b.ToTable("CourseShoppingCart");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -265,7 +280,7 @@ namespace RightPath.Migrations
                     b.Property<double>("Duration")
                         .HasColumnType("float");
 
-                    b.Property<int>("Lecture1Id")
+                    b.Property<int>("LectureId")
                         .HasColumnType("int");
 
                     b.Property<string>("Logo")
@@ -278,7 +293,7 @@ namespace RightPath.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Lecture1Id");
+                    b.HasIndex("LectureId");
 
                     b.ToTable("Courses");
                 });
@@ -308,6 +323,25 @@ namespace RightPath.Migrations
                     b.ToTable("Lectures");
                 });
 
+            modelBuilder.Entity("RightPath.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("ShoppingCarts");
+                });
+
             modelBuilder.Entity("RightPath.Models.Webminar", b =>
                 {
                     b.Property<int>("Id")
@@ -323,7 +357,7 @@ namespace RightPath.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Lecture1Id")
+                    b.Property<int>("LectureId")
                         .HasColumnType("int");
 
                     b.Property<string>("Logo")
@@ -341,9 +375,24 @@ namespace RightPath.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("Lecture1Id");
+                    b.HasIndex("LectureId");
 
                     b.ToTable("Webminars");
+                });
+
+            modelBuilder.Entity("ShoppingCartWebminar", b =>
+                {
+                    b.Property<int>("CartsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WebminarsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartsId", "WebminarsId");
+
+                    b.HasIndex("WebminarsId");
+
+                    b.ToTable("ShoppingCartWebminar");
                 });
 
             modelBuilder.Entity("RightPath.Models.ApplicationUser", b =>
@@ -355,6 +404,21 @@ namespace RightPath.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("CourseShoppingCart", b =>
+                {
+                    b.HasOne("RightPath.Models.ShoppingCart", null)
+                        .WithMany()
+                        .HasForeignKey("CartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RightPath.Models.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CoursesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -412,11 +476,22 @@ namespace RightPath.Migrations
                 {
                     b.HasOne("RightPath.Models.Lecture", "Lecture")
                         .WithMany()
-                        .HasForeignKey("Lecture1Id")
+                        .HasForeignKey("LectureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Lecture");
+                });
+
+            modelBuilder.Entity("RightPath.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("RightPath.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RightPath.Models.Webminar", b =>
@@ -429,13 +504,28 @@ namespace RightPath.Migrations
 
                     b.HasOne("RightPath.Models.Lecture", "Lecture")
                         .WithMany()
-                        .HasForeignKey("Lecture1Id")
+                        .HasForeignKey("LectureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("City");
 
                     b.Navigation("Lecture");
+                });
+
+            modelBuilder.Entity("ShoppingCartWebminar", b =>
+                {
+                    b.HasOne("RightPath.Models.ShoppingCart", null)
+                        .WithMany()
+                        .HasForeignKey("CartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RightPath.Models.Webminar", null)
+                        .WithMany()
+                        .HasForeignKey("WebminarsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

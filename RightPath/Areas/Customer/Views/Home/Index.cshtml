@@ -40,6 +40,7 @@
 </style>
 
 <div class="row pb-3">
+    <h3>Webminars</h3>
     @foreach (var webminar in Model.Webminars)
     {
         <div class="col-lg-3 col-sm-6">
@@ -62,6 +63,8 @@
             </div>
         </div>
     }
+    <hr/>
+    <h3>Courses</h3>
     @foreach (var course in Model.Courses)
     {
         <div class="col-lg-3 col-sm-6">
@@ -76,7 +79,7 @@
                                 <p class="card-title text-dark text-opacity-75 text-center">@course.Description</p>
                             </div>
                             <div class="details-btn">
-                                <a asp-action="CourseDetails" asp-route-webminarId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                <a asp-action="CourseDetails" asp-route-courseId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
                             </div>
                         </div>
                     </div>

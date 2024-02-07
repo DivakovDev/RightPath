@@ -38,11 +38,11 @@
                         <span asp-validation-for="Webminar.CityId" class="text-danger"></span>
                     </div>
                     <div class="form-group py-1">
-                        <label asp-for="Webminar.Lecture1Id" class="control-label"></label>
-                        <select asp-for="@Model.Webminar.Lecture1Id" asp-items="@Model.LectureList" class="form-select">
+                        <label asp-for="Webminar.LectureId" class="control-label"></label>
+                        <select asp-for="@Model.Webminar.LectureId" asp-items="@Model.LectureList" class="form-select">
                             <option disabled selected>--Избери Водещ Лектор--</option>
                         </select>
-                        <span asp-validation-for="Webminar.Lecture1Id" class="text-danger"></span>
+                        <span asp-validation-for="Webminar.LectureId" class="text-danger"></span>
                     </div>
                     <div class="form-group py-1">
                         <label asp-for="Webminar.Logo" class="control-label"></label>

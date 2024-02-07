@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RightPath.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialDb : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,8 +31,6 @@ namespace RightPath.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EGN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -190,6 +188,25 @@ namespace RightPath.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Courses",
                 columns: table => new
                 {
@@ -199,14 +216,14 @@ namespace RightPath.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<double>(type: "float", nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture1Id = table.Column<int>(type: "int", nullable: false)
+                    LectureId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Lectures_Lecture1Id",
-                        column: x => x.Lecture1Id,
+                        name: "FK_Courses_Lectures_LectureId",
+                        column: x => x.LectureId,
                         principalTable: "Lectures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -223,7 +240,7 @@ namespace RightPath.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lecture1Id = table.Column<int>(type: "int", nullable: false)
+                    LectureId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,9 +252,57 @@ namespace RightPath.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Webminars_Lectures_Lecture1Id",
-                        column: x => x.Lecture1Id,
+                        name: "FK_Webminars_Lectures_LectureId",
+                        column: x => x.LectureId,
                         principalTable: "Lectures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CourseShoppingCart",
+                columns: table => new
+                {
+                    CartsId = table.Column<int>(type: "int", nullable: false),
+                    CoursesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseShoppingCart", x => new { x.CartsId, x.CoursesId });
+                    table.ForeignKey(
+                        name: "FK_CourseShoppingCart_Courses_CoursesId",
+                        column: x => x.CoursesId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseShoppingCart_ShoppingCarts_CartsId",
+                        column: x => x.CartsId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartWebminar",
+                columns: table => new
+                {
+                    CartsId = table.Column<int>(type: "int", nullable: false),
+                    WebminarsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartWebminar", x => new { x.CartsId, x.WebminarsId });
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartWebminar_ShoppingCarts_CartsId",
+                        column: x => x.CartsId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartWebminar_Webminars_WebminarsId",
+                        column: x => x.WebminarsId,
+                        principalTable: "Webminars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -282,9 +347,24 @@ namespace RightPath.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_Lecture1Id",
+                name: "IX_Courses_LectureId",
                 table: "Courses",
-                column: "Lecture1Id");
+                column: "LectureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseShoppingCart_CoursesId",
+                table: "CourseShoppingCart",
+                column: "CoursesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_ApplicationUserId",
+                table: "ShoppingCarts",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartWebminar_WebminarsId",
+                table: "ShoppingCartWebminar",
+                column: "WebminarsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Webminars_CityId",
@@ -292,9 +372,9 @@ namespace RightPath.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Webminars_Lecture1Id",
+                name: "IX_Webminars_LectureId",
                 table: "Webminars",
-                column: "Lecture1Id");
+                column: "LectureId");
         }
 
         /// <inheritdoc />
@@ -316,13 +396,22 @@ namespace RightPath.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "CourseShoppingCart");
 
             migrationBuilder.DropTable(
-                name: "Webminars");
+                name: "ShoppingCartWebminar");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
+
+            migrationBuilder.DropTable(
+                name: "ShoppingCarts");
+
+            migrationBuilder.DropTable(
+                name: "Webminars");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

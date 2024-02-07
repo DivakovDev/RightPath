@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RightPath.Models
 {
-    public class Course : IProduct
+    public class Course
     {
         [Key]
         public int Id { get; set; }
@@ -27,10 +27,13 @@ namespace RightPath.Models
         [ValidateNever]
         public string Logo { get; set; }
         [DisplayName("Лектор")]
-        public int Lecture1Id { get; set; }
-        [ForeignKey("Lecture1Id")]
+        public int LectureId { get; set; }
+        [ForeignKey("LectureId")]
         [ValidateNever]
         public Lecture Lecture { get; set; }
+
+        public List<ShoppingCart> Carts { get; set; } = new List<ShoppingCart>();
+
 
     }
 }
