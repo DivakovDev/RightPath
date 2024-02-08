@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RightPath.Models;
 using RightPath.Models.ViewModel;
 using RightPath.Repository.IRepository;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace RightPath.Areas.Customer.Controllers
 {
@@ -45,10 +47,57 @@ namespace RightPath.Areas.Customer.Controllers
             Webminar webminar = _unitOfWork.Webminar.Get(u => u.Id == webminarId, includeProperties: "City,Lecture");
             return View(webminar);
         }
+        [HttpPost]
+        [Authorize]
+        public IActionResult WebminarDetails(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicationUserId = userId;
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
+            u.Id == shoppingCart.Id);
+
+            if(cartFromDb != null)
+            {
+                _unitOfWork.ShoppingCart.Update(shoppingCart);
+            }
+            else
+            {
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+            }
+
+            _unitOfWork.ShoppingCart.Add(shoppingCart);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult CourseDetails(int courseId)
         {
             Course course = _unitOfWork.Course.Get(y => y.Id == courseId, includeProperties: "Lecture");
             return View(course);
+        }
+        [HttpPost]
+        [Authorize]
+        public IActionResult CourseDetails(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicationUserId = userId;
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
+    u.Id == shoppingCart.Id);
+
+            if (cartFromDb != null)
+            {
+                _unitOfWork.ShoppingCart.Update(shoppingCart);
+            }
+            else
+            {
+                Console.WriteLine("Yoou already add it!");
+            }
+
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
         }
 
 
