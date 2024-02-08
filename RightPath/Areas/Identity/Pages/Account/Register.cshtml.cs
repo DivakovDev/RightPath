@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using RightPath.Models;
+using RightPath.Repository;
 
 namespace RightPath.Areas.Identity.Pages.Account
 {
@@ -34,12 +35,15 @@ namespace RightPath.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private readonly UnitOfWork _unitOfWork;
+
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
+            UnitOfWork unitOfWork,
             IEmailSender emailSender)
         {
             _roleManager = roleManager;
@@ -49,6 +53,7 @@ namespace RightPath.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -164,8 +169,15 @@ namespace RightPath.Areas.Identity.Pages.Account
                     else
                     {
                         await _userManager.AddToRoleAsync(user, StaticDetail.Role_Customer);
-
                     }
+
+                    ShoppingCart shoppingCart = new ShoppingCart
+                    {
+                        ApplicationUserId = user.Id,
+                    };
+
+                    _unitOfWork.ShoppingCart.Add(shoppingCart);
+                    _unitOfWork.Save();
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

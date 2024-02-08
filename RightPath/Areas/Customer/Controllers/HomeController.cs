@@ -49,26 +49,23 @@ namespace RightPath.Areas.Customer.Controllers
         }
         [HttpPost]
         [Authorize]
-        public IActionResult WebminarDetails(ShoppingCart shoppingCart)
+        [ActionName("WebminarDetails")]
+        public IActionResult WebminarDetailsPOST(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            shoppingCart.ApplicationUserId = userId;
 
-            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
-            u.Id == shoppingCart.Id);
 
-            if(cartFromDb != null)
+            Webminar webminar = _unitOfWork.Webminar.Get(c => c.Id == id);
+            ShoppingCart shoppingCart = _unitOfWork.ShoppingCart.Get(y => y.ApplicationUserId == userId, "Webminars");
+
+            if (!shoppingCart.Webminars.Contains(webminar))
             {
+                shoppingCart.Webminars.Add(webminar);
                 _unitOfWork.ShoppingCart.Update(shoppingCart);
-            }
-            else
-            {
-                _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
             }
 
-            _unitOfWork.ShoppingCart.Add(shoppingCart);
-            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
         public IActionResult CourseDetails(int courseId)
@@ -78,25 +75,23 @@ namespace RightPath.Areas.Customer.Controllers
         }
         [HttpPost]
         [Authorize]
-        public IActionResult CourseDetails(ShoppingCart shoppingCart)
+        [ActionName("CourseDetails")]
+        public IActionResult CourseDetailsPOST(int id)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            shoppingCart.ApplicationUserId = userId;
 
-            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
-    u.Id == shoppingCart.Id);
 
-            if (cartFromDb != null)
+            Course course = _unitOfWork.Course.Get(c => c.Id == id);
+            ShoppingCart shoppingCart = _unitOfWork.ShoppingCart.Get(y => y.ApplicationUserId == userId, "Courses");
+
+            if (!shoppingCart.Courses.Contains(course))
             {
+                shoppingCart.Courses.Add(course);
                 _unitOfWork.ShoppingCart.Update(shoppingCart);
-            }
-            else
-            {
-                Console.WriteLine("Yoou already add it!");
+                _unitOfWork.Save();
             }
 
-            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 
