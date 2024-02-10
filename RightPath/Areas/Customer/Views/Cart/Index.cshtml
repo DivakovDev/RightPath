@@ -1,56 +1,29 @@
 ﻿<form method="post">
     <br />
     <div class="card shadow border-0">
-        <div class="card-header bg-secondary bg-gradient text-light ml-0 py-4">
-            <div class="row px-4">
-                <div class="col-6">
-                    <h5 class="pt-2 text-white">
-                        Shopping Cart
-                    </h5>
+        <div class="card-header bg-secondary bg-gradient text-light py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="text-dark text-uppercase">Лист от Любими</h3>
                 </div>
-
             </div>
         </div>
         <div class="card-body my-4">
             <div class="row">
-            </div>
-            <div class="row mb-3 pb-3">
-                <div class="col-md-2 offset-md-1">
-                    <a href="#" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Continue Shopping</small></a>
-                </div>
-                <div class="col-md-10 offset-md-1">
-
-
-                    <div class="row border-bottom pb-3">
-                        <div class="d-none d-lg-block col-lg-1 text-center py-2">
-                            <img src="https://placehold.co/600x400" class="rounded" width="100%" />
-                        </div>
-                        <div class="col-12 col-lg-6 pt-md-3">
-                            <h5 class="text-uppercase text-secondary"><strong>Title</strong></h5>
-                            <p><small>Description</small></p>
-                        </div>
-                        <div class="col-12  col-lg-5 text-center row">
-                            <div class="col-3 col-sm-4 col-lg-2 offset-lg-1 text-right pt-2">
-                                <a href="#" class="btn btn-danger bg-gradient py-2 ">
-                                    <i class="bi bi-trash-fill"></i>
-                                </a>
-                            </div>
-                        </div>
-
+                <div class="row mb-3 pb-3">
+                    <div class="col-md-2 offset-md-1">
+                        <a href="/" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Продължи Търсенето</small></a>
                     </div>
-
-
-
                 </div>
                 @foreach (var webminar in (IEnumerable<Webminar>)ViewBag.Webminars)
                 {
                     <div class="col-lg-3 col-sm-6">
                         <div class="row p-2">
                             <div class="col-12 p-1">
-                                <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card">
+                                <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
                                     <img src="@webminar.Logo" class="card-img-top rounded" />
                                     <div class="custom-card-body">
-                                        <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center">@webminar.Title</p>
+                                        <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@webminar.Title</p>
                                         <p class="card-title text-warning text-center">by <b>@webminar.Lecture.Name</b></p>
                                         <div class="custom-description">
                                             <p class="card-title text-dark text-opacity-75 text-center">@webminar.Description</p>
@@ -69,10 +42,10 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="row p-2">
                             <div class="col-12 p-1">
-                                <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card">
+                                <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
                                     <img src="@course.Logo" class="card-img-top rounded" />
                                     <div class="custom-card-body">
-                                        <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center">@course.Title</p>
+                                        <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@course.Title</p>
                                         <p class="card-title text-warning text-center">by <b>@course.Lecture.Name</b></p>
                                         <div class="custom-description">
                                             <p class="card-title text-dark text-opacity-75 text-center">@course.Description</p>
@@ -86,13 +59,6 @@
                         </div>
                     </div>
                 }
-            </div>
-            <div class="card-footer bg-white border-0">
-                <div class="row">
-                    <div class="col-md-2 offset-md-5">
-                        <a href="#" class="btn btn-primary border-0 bg-gradient w-100 py-2">Summary</a>
-                    </div>
-                </div>
             </div>
         </div>
 </form>
