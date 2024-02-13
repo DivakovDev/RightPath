@@ -15,50 +15,80 @@
                         <a href="/" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Продължи Търсенето</small></a>
                     </div>
                 </div>
-                @foreach (var webminar in (IEnumerable<Webminar>)ViewBag.Webminars)
+                @if (ViewBag.Webminars != null && ((IEnumerable<Webminar>)ViewBag.Webminars).Any())
                 {
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="row p-2">
-                            <div class="col-12 p-1">
-                                <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
-                                    <img src="@webminar.Logo" class="card-img-top rounded" />
-                                    <div class="custom-card-body">
-                                        <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@webminar.Title</p>
-                                        <p class="card-title text-warning text-center">by <b>@webminar.Lecture.Name</b></p>
-                                        <div class="custom-description">
-                                            <p class="card-title text-dark text-opacity-75 text-center">@webminar.Description</p>
-                                        </div>
-                                        <div class="details-btn">
-                                            <a asp-controller="Home" asp-action="WebminarDetails" asp-route-courseId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                    @foreach (var webminar in (IEnumerable<Webminar>)ViewBag.Webminars)
+                    {
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="row p-2">
+                                <div class="col-12 p-1">
+                                    <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
+                                        <img src="@webminar.Logo" class="card-img-top rounded" />
+                                        <div class="custom-card-body">
+                                            <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@webminar.Title</p>
+                                            <p class="card-title text-warning text-center">by <b>@webminar.Lecture.Name</b></p>
+                                            <div class="custom-description">
+                                                <p class="card-title text-dark text-opacity-75 text-center">@webminar.Description</p>
+                                            </div>
+                                            <div class="details-btn">
+                                                <a asp-controller="Home" asp-action="WebminarDetails" asp-route-courseId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                                <button type="button" class="btn btn-danger mt-2" onclick="removeItem('@webminar.Id', 'Webminar')">Изтрий</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
-                @foreach (var course in (IEnumerable<Course>)ViewBag.Courses)
+
+                @if (ViewBag.Courses != null && ((IEnumerable<Course>)ViewBag.Courses).Any())
                 {
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="row p-2">
-                            <div class="col-12 p-1">
-                                <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
-                                    <img src="@course.Logo" class="card-img-top rounded" />
-                                    <div class="custom-card-body">
-                                        <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@course.Title</p>
-                                        <p class="card-title text-warning text-center">by <b>@course.Lecture.Name</b></p>
-                                        <div class="custom-description">
-                                            <p class="card-title text-dark text-opacity-75 text-center">@course.Description</p>
-                                        </div>
-                                        <div class="details-btn">
-                                            <a asp-controller="Home" asp-action="CourseDetails" asp-route-courseId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                    @foreach (var course in (IEnumerable<Course>)ViewBag.Courses)
+                    {
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="row p-2">
+                                <div class="col-12 p-1">
+                                    <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
+                                        <img src="@course.Logo" class="card-img-top rounded" />
+                                        <div class="custom-card-body">
+                                            <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@course.Title</p>
+                                            <p class="card-title text-warning text-center">by <b>@course.Lecture.Name</b></p>
+                                            <div class="custom-description">
+                                                <p class="card-title text-dark text-opacity-75 text-center">@course.Description</p>
+                                            </div>
+                                            <div class="details-btn">
+                                                <a asp-controller="Home" asp-action="CourseDetails" asp-route-courseId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                                <button type="button" class="btn btn-danger mt-2" onclick="removeItem('@course.Id', 'Course')">Изтрий</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    }
+                }
+
+                @if ((ViewBag.Webminars == null || !((IEnumerable<Webminar>)ViewBag.Webminars).Any())
+                && (ViewBag.Courses == null || !((IEnumerable<Course>)ViewBag.Courses).Any()))
+                {
+                    <div class="col-12 text-center">
+                        <p>Нямате Любими Курсове и Уебминари!</p>
                     </div>
                 }
             </div>
         </div>
+    </div>
+
+    <!-- JavaScript to handle item removal -->
+    <script>
+        function removeItem(itemId, itemType) {
+            if (confirm("Сигурни ли сте, че искате да изтриете този елемент от кошницата?")) {
+                $.post('@Url.Action("RemoveFromCart", "Cart")', { itemId: itemId, itemType: itemType }, function (data) {
+                    // Handle success or refresh the page
+                    location.reload();
+                });
+            }
+        }
+    </script>
 </form>
