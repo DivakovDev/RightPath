@@ -61,12 +61,12 @@ namespace RightPath.Areas.Admin.Controllers
                 if (citiesVM.City.Id == 0)
                 {
                     _unitOfWork.City.Add(citiesVM.City);
-                    TempData["success"] = "Уебминара е създаден успешно!";
+                    TempData["success"] = "Града е добавен успешно!";
                 }
                 else
                 {
                     _unitOfWork.City.Update(citiesVM.City);
-                    TempData["success"] = "Уебминара е редактиран успешно!";
+                    TempData["success"] = "Града е редактиран успешно!";
                 }
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
