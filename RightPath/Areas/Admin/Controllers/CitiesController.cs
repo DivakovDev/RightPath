@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RightPath.Data;
 using RightPath.Models;
+using RightPath.Models.ViewModel;
 using RightPath.Repository.IRepository;
 
 namespace RightPath.Areas.Admin.Controllers
@@ -31,60 +33,46 @@ namespace RightPath.Areas.Admin.Controllers
         }
 
         // GET: Cities/Create
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            CitiesVM citiesVM = new()
+            {
+                City = new City()
+            };
+
+            if (id == null || id == 0)
+            {
+                //functionality for create
+                return View(citiesVM);
+            }
+            else
+            {
+                //functionality for edit
+                citiesVM.City = _unitOfWork.City.Get(u => u.Id == id);
+                return View(citiesVM);
+            }
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(City city)
+        public IActionResult Upsert(CitiesVM citiesVM)
         {
-            if (city.Name == city.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name");
-            }
-
             if (ModelState.IsValid)
             {
-                _unitOfWork.City.Add(city);
+                if (citiesVM.City.Id == 0)
+                {
+                    _unitOfWork.City.Add(citiesVM.City);
+                    TempData["success"] = "Уебминара е създаден успешно!";
+                }
+                else
+                {
+                    _unitOfWork.City.Update(citiesVM.City);
+                    TempData["success"] = "Уебминара е редактиран успешно!";
+                }
                 _unitOfWork.Save();
-                TempData["success"] = "Градът е създаден успешно!";
                 return RedirectToAction("Index");
             }
             return View();
-        }
 
-        // GET: Cities/Edit/5
-        public IActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            City? city = _unitOfWork.City.Get(u => u.Id == id);
-
-            if (city == null)
-            {
-                return NotFound();
-            }
-            return View(city);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(City city)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.City.Update(city);
-                _unitOfWork.Save();
-                TempData["success"] = "Детайлите по градът са променени успешно!";
-                return RedirectToAction("Index");
-            }
-            return View();
         }
 
         // GET: Cities/Delete/5

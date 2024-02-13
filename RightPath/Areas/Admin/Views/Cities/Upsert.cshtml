@@ -1,0 +1,55 @@
+﻿@model CitiesVM;
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-dark py-2"> @(Model.City.Id != 0 ? "Редактирай" : "Създай") Уебминар</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form asp-action="Upsert">
+            <input asp-for="City.Id" hidden />
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group py-1">
+                        <label asp-for="City.Name" class="control-label"></label>
+                        <input asp-for="City.Name" class="form-control" />
+                        <span asp-validation-for="City.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group py-1">
+                        <label asp-for="City.DisplayOrder" class="control-label"></label>
+                        <input asp-for="City.DisplayOrder" class="form-control" />
+                        <span asp-validation-for="City.DisplayOrder" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="row pt-3">
+                        <div class="col-6 col-md-3">
+                            @if (Model.City.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary btn-md form-control">
+                                    Редактирай
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary btn-md form-control">
+                                    Създай
+                                </button>
+                            }
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-link btn-md" asp-action="Index">Назад</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
