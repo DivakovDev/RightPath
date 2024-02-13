@@ -27,9 +27,13 @@ namespace RightPath.Areas.Customer.Controllers
             ViewBag.Courses = shoppingCart.Courses
                 .Select(c => _unitOfWork.Course.Get(course =>course.Id == c.Id, "Lecture")).ToList();
             ViewBag.Webminars = shoppingCart.Webminars
-                .Select(c => _unitOfWork.Webminar.Get(course => course.Id == c.Id, "City,Lecture")).ToList();
+                .Select(w => _unitOfWork.Webminar.Get(webminar => webminar.Id == w.Id, "City,Lecture")).ToList();
 
             return View();
         }
+
+
+
+
     }
 }

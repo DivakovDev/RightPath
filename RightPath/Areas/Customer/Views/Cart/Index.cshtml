@@ -29,7 +29,7 @@
                                             <p class="card-title text-dark text-opacity-75 text-center">@webminar.Description</p>
                                         </div>
                                         <div class="details-btn">
-                                            <a asp-action="CourseDetails" asp-route-courseId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                            <a asp-controller="Home" asp-action="WebminarDetails" asp-route-courseId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                             <p class="card-title text-dark text-opacity-75 text-center">@course.Description</p>
                                         </div>
                                         <div class="details-btn">
-                                            <a asp-action="CourseDetails" asp-route-courseId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                            <a asp-controller="Home" asp-action="CourseDetails" asp-route-courseId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
                                         </div>
                                     </div>
                                 </div>
