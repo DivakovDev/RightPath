@@ -47,7 +47,6 @@ namespace RightPath.Areas.Customer.Controllers
                 if (courseToRemove != null)
                 {
                     shoppingCart.Courses.Remove(courseToRemove);
-                    _unitOfWork.Course.Remove(courseToRemove); // Remove from Course table
                 }
             }
             else if (itemType == "Webminar")
@@ -56,7 +55,6 @@ namespace RightPath.Areas.Customer.Controllers
                 if (webminarToRemove != null)
                 {
                     shoppingCart.Webminars.Remove(webminarToRemove);
-                    _unitOfWork.Webminar.Remove(webminarToRemove); // Remove from Webminar table
                 }
             }
 

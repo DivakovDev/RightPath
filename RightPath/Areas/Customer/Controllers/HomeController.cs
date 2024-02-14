@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RightPath.Models;
 using RightPath.Models.ViewModel;
@@ -65,6 +66,7 @@ namespace RightPath.Areas.Customer.Controllers
                 _unitOfWork.ShoppingCart.Update(shoppingCart);
                 _unitOfWork.Save();
             }
+
 
             return RedirectToAction(nameof(Index));
         }
