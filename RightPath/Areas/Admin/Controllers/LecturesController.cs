@@ -135,5 +135,20 @@ namespace RightPath.Areas.Admin.Controllers
             TempData["success"] = "Уебминара е изтрит успешно!";
             return RedirectToAction("Index");
         }
+
+        public IActionResult Details(int lectureId)
+        {
+            Lecture lecture = _unitOfWork.Lecture.Get(u => u.Id == lectureId);
+            return View(lecture);
+        }
+
+        [HttpPost]
+        [ActionName("Details")]
+        public IActionResult DetailsPOST(int id)
+        {
+            Lecture lecture = _unitOfWork.Lecture.Get(u => u.Id == id);
+            return View(lecture);
+        }
+
     }
 }

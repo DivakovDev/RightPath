@@ -31,7 +31,7 @@
                                                 <p class="card-title text-dark text-opacity-75 text-center">@webminar.Description</p>
                                             </div>
                                             <div class="details-btn">
-                                                <a asp-controller="Home" asp-action="WebminarDetails" asp-route-courseId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                                <a asp-controller="Home" asp-action="WebminarDetails" asp-route-webminarId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
                                                 <button type="button" class="btn btn-danger mt-2" onclick="removeItem('@webminar.Id', 'Webminar')">Изтрий</button>
                                             </div>
                                         </div>
