@@ -173,7 +173,7 @@ namespace RightPath.Areas.Identity.Pages.Account
 
                     ShoppingCart shoppingCart = new ShoppingCart
                     {
-                        ApplicationUserId = user.Id,
+                        ApplicationUserId = user.Id.ToString()
                     };
 
                     _unitOfWork.ShoppingCart.Add(shoppingCart);

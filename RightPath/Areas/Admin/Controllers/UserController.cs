@@ -28,7 +28,6 @@ namespace RightPath.Areas.Admin.Controllers
         // GET: UserList
         public IActionResult Index()
         {
-
             return View(_unitOfWork.ApplicationUser.GetAll());
         }
 
@@ -37,6 +36,38 @@ namespace RightPath.Areas.Admin.Controllers
         {
             List<ApplicationUser> applicationUsers = _unitOfWork.ApplicationUser.GetAll().ToList();
             return Json(new {data = applicationUsers});
+        }
+
+        // GET: Cities/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            ApplicationUser? userFromDb = _unitOfWork.ApplicationUser
+                .Get(u => u.Id == id);
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(userFromDb);
+        }
+
+        // POST: User/Delete/5
+        public IActionResult DeleteConfirmed(int? userId)
+        {
+            ApplicationUser user = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.ApplicationUser.Remove(user);
+            _unitOfWork.Save();
+            TempData["success"] = "Потребителят е изтрит успешно!";
+            return RedirectToAction("Index");
         }
     }
 }

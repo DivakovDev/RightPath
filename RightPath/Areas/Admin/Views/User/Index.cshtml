@@ -42,9 +42,7 @@
                                 <a asp-controller="Lectures" asp-action="Upsert" asp-route-id="@item.Id" class="shadow btn btn-light mx-2 px-4">
                                     <i class="bi bi-pencil-square"></i> Редактирай
                                 </a>
-                                <a asp-controller="Lectures" asp-action="Delete" asp-route-id="@item.Id" class="w-8 shadow btn btn-danger mx-2 px-3">
-                                    <i class="bi bi-trash-fill"></i> Изтрий
-                                </a>
+                                <button type="button" class="btn btn-danger mt-2" onclick="deleteUser('@item.Id')">Изтрий</button>
                             </div>
                         </td>
                     </tr>
@@ -53,4 +51,29 @@
         </table>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        function deleteUser(userId) {
+            if (confirm('Сигурни ли сте, че искате да изтриете този потребител?')) {
+                $.ajax({
+                    url: '/Admin/User/Delete',
+                    type: 'POST',
+                    data: { userId: userId },
+                    success: function (result) {
+                        // Optionally handle success (e.g., show a message)
+                        console.log(result);
+                        location.reload(); // Refresh the page or update the table as needed
+                    },
+                    error: function (error) {
+                        console.error('Error deleting user:', error);
+                        // Optionally handle errors (e.g., show an error message)
+                    }
+                });
+            }
+        }
+    </script>
+}
+
 
