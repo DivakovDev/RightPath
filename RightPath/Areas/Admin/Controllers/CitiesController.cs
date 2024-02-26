@@ -75,28 +75,10 @@ namespace RightPath.Areas.Admin.Controllers
 
         }
 
-        // GET: Cities/Delete/5
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            City? cityFromDb = _unitOfWork.City
-                .Get(u => u.Id == id);
-            if (cityFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(cityFromDb);
-        }
-
         // POST: Cities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int? id)
+        public IActionResult Delete(int? id)
         {
             City? obj = _unitOfWork.City.Get(u => u.Id == id);
             if (obj == null)

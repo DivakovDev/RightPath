@@ -107,28 +107,11 @@ namespace RightPath.Areas.Admin.Controllers
 
         }
 
-        // GET: Webminars/Delete/5
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            Course? courseFromDb = _unitOfWork.Course
-                .Get(u => u.Id == id);
-            if (courseFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(courseFromDb);
-        }
 
         // POST: Webminars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int? id)
+        public IActionResult Delete(int? id)
         {
             Course? obj = _unitOfWork.Course.Get(u => u.Id == id);
             if (obj == null)

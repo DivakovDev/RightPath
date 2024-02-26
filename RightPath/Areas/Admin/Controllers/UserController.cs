@@ -38,28 +38,11 @@ namespace RightPath.Areas.Admin.Controllers
             return Json(new {data = applicationUsers});
         }
 
-        // GET: Cities/Delete/5
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            ApplicationUser? userFromDb = _unitOfWork.ApplicationUser
-                .Get(u => u.Id == id);
-            if (userFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(userFromDb);
-        }
 
         // POST: User/Delete/5
-        public IActionResult DeleteConfirmed(int? userId)
+        public IActionResult Delete(string id)
         {
-            ApplicationUser user = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+            ApplicationUser user = _unitOfWork.ApplicationUser.Get(u => u.Id == id);
             if (user == null)
             {
                 return NotFound();
