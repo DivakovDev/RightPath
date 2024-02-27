@@ -113,11 +113,9 @@ namespace RightPath.Areas.Admin.Controllers
         }
 
         // POST: Webminars/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            Webminar? obj = _unitOfWork.Webminar.Get(u => u.Id == id);
+            Webminar obj = _unitOfWork.Webminar.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();

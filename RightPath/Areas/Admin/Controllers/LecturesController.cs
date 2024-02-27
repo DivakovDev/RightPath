@@ -103,8 +103,6 @@ namespace RightPath.Areas.Admin.Controllers
         }
 
         // POST: Lectures/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public IActionResult Delete(int? id)
         {
             Lecture? obj = _unitOfWork.Lecture.Get(u => u.Id == id);

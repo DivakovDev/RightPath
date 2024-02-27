@@ -76,9 +76,7 @@ namespace RightPath.Areas.Admin.Controllers
         }
 
         // POST: Cities/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
             City? obj = _unitOfWork.City.Get(u => u.Id == id);
             if (obj == null)
