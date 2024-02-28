@@ -10,11 +10,12 @@
         </div>
         <div class="card-body my-4">
             <div class="row">
-                <div class="row mb-3 pb-3">
+                <div class="row">
                     <div class="col-md-2 offset-md-1">
                         <a href="/" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Продължи Търсенето</small></a>
                     </div>
                 </div>
+                <h3 class="text-dark text-uppercase text-center mb-5" style="text-decoration-line: underline; font-size:28px">Предстоящи Събития</h3>
                 @* Display Webminars *@
                 @if (ViewBag.Webminars != null && ((IEnumerable<Webminar>)ViewBag.Webminars).Any())
                 {
@@ -81,8 +82,9 @@
                     </div>
                 }
             </div>
+            <hr/>
             <div class="row mt-5">
-
+                <h3 class="text-dark text-uppercase text-center mb-5" style="text-decoration-line: underline; font-size:28px">Минали Събития</h3>
                 <br />
                 @* Display Past Webminars *@
                 @if (ViewBag.Webminars != null && ((IEnumerable<Webminar>)ViewBag.Webminars).Any())
@@ -91,24 +93,18 @@
                     {
                         if (webminar.StartDate < DateTime.Now)
                         {
-                            <div class="col-lg-12 mt-3 col-sm-6">
-                                <!-- New section for past events -->
-                                <h3 class="text-dark text-uppercase text-center" style="text-decoration-line: underline; font-size:28px">Минали Събития</h3>
-                                <div class="row p-2">
-                                    <div class="col-3 p-1">
-                                        <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:550px;">
-                                            <img src="@webminar.Logo" class="card-img-top rounded" style="height:224px;" />
-                                            <div class="custom-card-body">
-                                                <p class="card-title pt-2 mt-3 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@webminar.Title</p>
-                                                <p class="card-title text-warning text-center">by <b>@webminar.Lecture.Name</b></p>
-                                                <div class="custom-description">
-                                                    <p class="card-title text-dark text-opacity-75 text-center" style="margin: 10px 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@webminar.Description</p>
-                                                </div>
-                                                <div class="details-btn">
-                                                    <a asp-controller="Home" asp-action="WebminarDetails" asp-route-webminarId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
-                                                    <button type="button" class="btn btn-danger mt-2 bg-gradient border-0 rounded form-control" onclick="removeItem('@webminar.Id', 'Webminar')">Изтрий</button>
-                                                </div>
-                                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:550px;">
+                                    <img src="@webminar.Logo" class="card-img-top rounded" style="height:224px;" />
+                                    <div class="custom-card-body">
+                                        <p class="card-title pt-2 mt-3 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@webminar.Title</p>
+                                        <p class="card-title text-warning text-center">by <b>@webminar.Lecture.Name</b></p>
+                                        <div class="custom-description">
+                                            <p class="card-title text-dark text-opacity-75 text-center" style="margin: 10px 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@webminar.Description</p>
+                                        </div>
+                                        <div class="details-btn">
+                                            <a asp-controller="Home" asp-action="WebminarDetails" asp-route-webminarId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                            <button type="button" class="btn btn-danger mt-2 bg-gradient border-0 rounded form-control" onclick="removeItem('@webminar.Id', 'Webminar')">Изтрий</button>
                                         </div>
                                     </div>
                                 </div>

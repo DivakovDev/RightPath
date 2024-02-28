@@ -5,15 +5,32 @@ using RightPath.Models;
 
 namespace RightPath.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+        public PasswordHasher<ApplicationUser> _hasher;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //create user
+            var appicationUser = new ApplicationUser
+            {
+                Email = "admin@gmail.com",
+                EmailConfirmed = true,
+                UserName = "Admin",
+                NormalizedUserName = "ADMIN",
+               
+            };
+
+            //set user password
+            PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
+            appicationUser.PasswordHash = ph.HashPassword(appicationUser, "123456");
+
+            //seed user
+            modelBuilder.Entity<ApplicationUser>().HasData(appicationUser);
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<City> Cities { get; set; }

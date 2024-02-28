@@ -22,12 +22,12 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1" style="align-items:center;">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a class="nav-link text-dark" style="padding-right:0;" asp-area="Customer" asp-controller="Home" asp-action="Index">Начало</a>
                         </li>
                         @if (User.IsInRole(StaticDetail.Role_Admin))
                         {
                             <li class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle" style="padding-left:0;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Управлявай Съдържанието
                                 </button>
                                 <ul class="dropdown-menu">
@@ -54,7 +54,7 @@
                         }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="Index">  
-                                Любими <i class="bi bi-box2-heart-fill"></i>&nbsp;
+                                Любими
                             </a>
                         </li>
                         
