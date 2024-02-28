@@ -39,52 +39,74 @@
     }
 </style>
 
-<div class="row pb-3">
-    <h3>Webminars</h3>
-    @foreach (var webminar in Model.Webminars)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class="row p-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
-                        <img src="@webminar.Logo" class="card-img-top rounded" />
-                        <div class="custom-card-body">
-                            <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@webminar.Title</p>
-                            <p class="card-title text-warning text-center">by <b>@webminar.Lecture.Name</b></p>
-                            <div class="custom-description">
-                                <p class="card-title text-dark text-opacity-75 text-center">@webminar.Description</p>
-                            </div>
-                            <div class="details-btn">
-                                <a asp-action="WebminarDetails" asp-route-webminarId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+<div>
+    <div class="my-5" style="position: relative;">
+        <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem;">
+            <div style="position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border-radius: 1rem; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to right, #4a148c, #303f9f); mix-blend-mode: multiply;"></div>
+                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
+                    <img style="width: 100%; object-fit: cover;" src="https://images.unsplash.com/photo-1461301214746-1e109215d6d3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="People working on laptops">
+                </div>
+                <div style="position: relative; padding-left: 1rem; padding-right: 1rem; padding-top: 4rem; padding-bottom: 4rem;">
+                    <h1 style="text-align: center; font-size: 2.25rem; font-weight: 800; letter-spacing: -0.01562em; color: #fff;">
+                        <span style="display: block;">Вземи контрола над</span>
+                        <span class="text-warning" style="display: block;">своето бъдеще</span>
+                    </h1>
+                    <p class="m-auto mt-5 text-white" style="max-width: 32rem; font-size: 1.25rem; font-weight:900; text-align: center;">Добре дошли в <span class="text-warning">RightPath</span>! Вашето място за набавяне на умения и постигане на цели!</>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row pb-3">
+        <h3 class="mt-3">Уебминари</h3>
+        @foreach (var webminar in Model.Webminars)
+        {
+            <div class="col-lg-3 col-sm-6 mb-5">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
+                            <img src="@webminar.Logo" class="card-img-top rounded" />
+                            <div class="custom-card-body">
+                                <p class="card-title pt-2 mt-3 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@webminar.Title</p>
+                                <p class="card-title text-warning text-center">by <b>@webminar.Lecture.Name</b></p>
+                                <div class="custom-description">
+                                    <p class="card-title text-dark text-opacity-75 text-center">@webminar.Description</p>
+                                </div>
+                                <div class="details-btn">
+                                    <a asp-action="WebminarDetails" asp-route-webminarId="@webminar.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-    <hr/>
-    <h3>Courses</h3>
-    @foreach (var course in Model.Courses)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class="row p-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
-                        <img src="@course.Logo" class="card-img-top rounded" />
-                        <div class="custom-card-body">
-                            <p class="card-title pt-2 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@course.Title</p>
-                            <p class="card-title text-warning text-center">by <b>@course.Lecture.Name</b></p>
-                            <div class="custom-description">
-                                <p class="card-title text-dark text-opacity-75 text-center">@course.Description</p>
-                            </div>
-                            <div class="details-btn">
-                                <a asp-action="CourseDetails" asp-route-courseId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+        }
+        <hr />
+        <h3 class="mb-3">Курсове</h3>
+        @foreach (var course in Model.Courses)
+        {
+            <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow border-top border-5 rounded custom-card" style="min-height:250px;">
+                            <img src="@course.Logo" class="card-img-top rounded" />
+                            <div class="custom-card-body">
+                                <p class="card-title pt-2 mt-3 h5 text-dark opacity-75 text-uppercase text-center" style="min-height:50px;">@course.Title</p>
+                                <p class="card-title text-warning text-center">by <b>@course.Lecture.Name</b></p>
+                                <div class="custom-description">
+                                    <p class="card-title text-dark text-opacity-75 text-center">@course.Description</p>
+                                </div>
+                                <div class="details-btn">
+                                    <a asp-action="CourseDetails" asp-route-courseId="@course.Id" class="btn btn-dark bg-gradient border-0 rounded form-control">Детайли</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
