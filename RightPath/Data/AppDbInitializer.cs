@@ -1,12 +1,15 @@
-﻿using RightPath.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using RightPath.Models;
+using RightPath.Repository;
 using System.ComponentModel.DataAnnotations;
 
 namespace RightPath.Data
 {
     public class AppDbinitializer
     {
-
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        public static async Task SeedAsync(IApplicationBuilder applicationBuilder)
         {
 
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
@@ -148,6 +151,50 @@ namespace RightPath.Data
 
                     context.SaveChanges();
                 }
+            }
+
+            using (var scope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var roles = new[] { StaticDetail.Role_Customer, StaticDetail.Role_Admin, StaticDetail.Role_Lecture };
+
+                foreach (var role in roles)
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                    }
+                }
+
+
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                string email = "admin@gmail.com";
+                string password = "123456";
+                string egn = "081295412";
+                string phoneNum = "08820784322";
+                string firstName = "Admin";
+
+                if (await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new ApplicationUser
+                    {
+                        FirstName = firstName,
+                        UserName = email,
+                        Email = email,
+                        EGN = egn,
+                        PhoneNumber = phoneNum,
+                    };
+
+                    var result = await userManager.CreateAsync(user, password);
+
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, StaticDetail.Role_Admin);
+                    }
+                }
+
             }
         }
     }

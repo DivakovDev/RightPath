@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using RightPath.Data;
+using RightPath.Models;
 using RightPath.Repository;
 using RightPath.Repository.IRepository;
 
@@ -26,7 +27,7 @@ namespace RightPath
             builder.Services.AddScoped<RightPath.Repository.UnitOfWork>();
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Identity/Account/Login";
@@ -47,7 +48,7 @@ namespace RightPath
             });
             var app = builder.Build();
 
-            AppDbinitializer.Seed(app);
+            AppDbinitializer.SeedAsync(app);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
