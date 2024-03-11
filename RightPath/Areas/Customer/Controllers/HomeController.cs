@@ -21,15 +21,31 @@ namespace RightPath.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string contentType = null)
         {
-            var viewModel = new HomeViewModel
+            var viewModel = new HomeViewModel();
+
+            if (contentType == "Webminars")
             {
-                Webminars = GetWebminars(), 
-                Courses = GetCourses()
-            };
+                viewModel.Webminars = GetWebminars();
+                ViewBag.ContentType = "Webminars";
+            }
+            else if (contentType == "Courses")
+            {
+                viewModel.Courses = GetCourses();
+                ViewBag.ContentType = "Courses";
+            }
+            else
+            {
+                viewModel.Webminars = GetWebminars();
+                viewModel.Courses = GetCourses();
+                ViewBag.ContentType = "All";
+            }
+
             return View(viewModel);
         }
+
+
 
         private IEnumerable<Webminar> GetWebminars()
         {
