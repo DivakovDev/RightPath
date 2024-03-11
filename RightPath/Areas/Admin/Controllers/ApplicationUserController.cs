@@ -92,8 +92,6 @@ namespace RightPath.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ApplicationUser model, string newPassword, string confirmPassword)
         {
-            if (ModelState.IsValid)
-            {
                 var user = await _userManager.FindByIdAsync(model.Id);
 
                 if (user == null)
@@ -103,6 +101,8 @@ namespace RightPath.Areas.Admin.Controllers
 
                 user.FirstName = model.FirstName;
                 user.Email = model.Email;
+                user.PhoneNumber = model.PhoneNumber;
+                user.EGN = model.EGN;
 
                 if (!string.IsNullOrEmpty(newPassword))
                 {
@@ -127,7 +127,7 @@ namespace RightPath.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-            }
+            
 
             return View(model);
         }
