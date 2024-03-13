@@ -23,52 +23,6 @@ namespace RightPath.Areas.Admin.Controllers
             return View(users);
         }
 
-        // GET: User/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: User/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ApplicationUser applicationUser, string confirmPassword)
-        {
-            if (ModelState.IsValid)
-            {
-                if (applicationUser.PasswordHash == null)
-                {
-                    ModelState.AddModelError("Password", "Паролата е задължително поле.");
-                    return View();
-                }
-
-                if (applicationUser.PasswordHash != confirmPassword)
-                {
-                    ModelState.AddModelError("Password", "Паролите не съвпадат.");
-                    return View();
-                }
-
-                var user = new ApplicationUser
-                {
-                    UserName = applicationUser.Email,
-                    Email = applicationUser.Email,
-                    FirstName = applicationUser.FirstName,
-                    EGN = applicationUser.EGN,
-                    PhoneNumber = applicationUser.PhoneNumber
-                };
-
-                var result = await _userManager.CreateAsync(user, applicationUser.PasswordHash);
-
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, StaticDetail.Role_Customer);
-
-                    return RedirectToAction("Index");
-                }
-            }
-            return View(applicationUser);
-        }
-
         // GET: User/Edit/5
         public async Task<ActionResult> Edit(string id)
         {

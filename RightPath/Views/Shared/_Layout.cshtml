@@ -44,7 +44,7 @@
                                         <a class="nav-link dropdown-item text-dark" asp-area="Admin" asp-controller="Cities" asp-action="Index">Градове</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link dropdown-item text-dark" asp-area="Admin" asp-controller="ApplicationUser" asp-action="Create">Създай Потребител</a>
+                                        <a class="nav-link dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Register">Създай Потребител</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link dropdown-item text-dark" asp-area="Admin" asp-controller="ApplicationUser" asp-action="Index">Менажирай Потребителите</a>
@@ -52,12 +52,14 @@
                                 </ul>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="Index">  
-                                Любими
-                            </a>
-                        </li>
-                        
+                        @if (User.IsInRole(StaticDetail.Role_Customer))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="Index">  
+                                    Любими
+                                </a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
