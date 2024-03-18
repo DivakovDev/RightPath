@@ -66,38 +66,9 @@
                         <button id="registerSubmit" type="submit" class="w-100 btn btn-md rounded btn-dark">Регистрирай</button>
                     </div>
                 </form>
-            </div>
-                <div class="col-md-12 p-3 text-center">
-                    <section>
-                        <p class="divider-text d-flex pt-3">or</p>
+                <a class="nav-link text-dark mt-3" style="text-decoration: underline;" asp-area="Identity" asp-page="/Account/Login">Влезте със съществуващ акаунт!</a>
 
-                        @{
-                            if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                            {
-                                <div>
-                                    <p>
-                                    Няма конфигурирани външни услуги за удостоверяване. Виж тази статия <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                            about setting up this ASP.NET application to support logging in via external services
-                                        </a>.
-                                    </p>
-                                </div>
-                            }
-                            else
-                            {
-                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                    <div>
-                                        <p>
-                                            @foreach (var provider in Model.ExternalLogins!)
-                                            {
-                                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                            }
-                                        </p>
-                                    </div>
-                                </form>
-                            }
-                        }
-                    </section>
-                </div>
+            </div>
         </div>
     </div>
 </div>
