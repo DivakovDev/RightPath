@@ -27,22 +27,34 @@ namespace RightPath.Data
                        new Lecture()
                         {
                             Name = "Юли Тонкин",
-                            Description = "Opicanie na  lector1",
-                            ProfileImage = "lecture1.png"
+                            Description = "Юли е предприемач, инвеститор, катализатор за промяна, стратег и автор.\r\n\r\nСъздател е на единствената по рода си Менторска Академия в България, която обхваща всички сфери на живота и всяка година служи на стотици българи да постигат и живеят целите си в личен и финансов план!",
+                            ProfileImage = "yuli-tonkin.jpg"
 
                         },
                         new Lecture()
                         {
-                            Name = "Боян Московски",
-                            Description = "Opicanie na  lector2",
-                            ProfileImage = "lecture1.png"
+                            Name = "Боян Москов",
+                            Description = "Боян Москов е собственик на дигитална агенция InteractiveOrb, софтуер за създаване на продажбени фунии - ConvertBuilder, академия за онлайн маркетинг - Masterclass.bg и 2 собствени онлайн магазина.\r\n\r\nСъс своята агенция за дигитален маркетинг с екип от 10 човека работят с десетки онлайн бизнеси в България и чужбина, някои от които са едни от най-големите брандове - Зора, Спорт Депо, Фитнеси Пулс, Адрес и Имотека - недвижими имоти и други. Рекламният бюджет, който управляват, е над 1 000 000 лв.",
+                            ProfileImage = "boyan-moskov.jpg"
 
                         },
                         new Lecture()
                         {
-                            Name = "Кристиян Валидолов",
-                            Description = "Opicanie na  lector2",
-                            ProfileImage = "lecture1.png"
+                            Name = "Проф. Красимир Петров",
+                            Description = "Проф. Красимир Петров има магистърска степен от Университета в Делауеър и докторска степен от Държавния икономически университет в Охайо (1999). През 2000-2004 г. е работил в Sterling Commerce, дъщерно дружество на SBC Communications. Започва да преподава през 2005 г. като редовен асистент в Американския университет в България, като преподава макроикономика, пари и банкиране, международни финанси със специализирани курсове по управление на риска, макроикономическо инвестиране и алтернативни подходи за инвестиране като цикличен анализ на инвестициите, технически анализ и поведенчески анализ.",
+                            ProfileImage = "prof-krasimir-petrov.jpg"
+                        },
+                        new Lecture()
+                        {
+                            Name = "Светлин Наков",
+                            Description = "Светлин Наков има 20+ години технически опит като софтуерен инженер, ръководител на проекти, консултант, обучител и дигитален предприемач с богат технически опит (Уеб разработка, информационни системи, бази данни, софтуерно инженерство, криптография, блокчейн, C#, Java, JS, PHP , Python). Светлин Наков е редовен лектор на стотици конференции, семинари, курсове и други обучения и има докторска степен по компютърни науки. Автор е на 15 книги за компютърно програмиране и софтуерни технологии, живее в София, България и е създател, обучител и вдъхновител в СофтУни.",
+                            ProfileImage = "svetlin-nakov.jpg"
+                        },
+                        new Lecture()
+                        {
+                            Name = "Давид Бонев",
+                            Description = "Давид Бонев е Главен финансов директор на международния проект за здравеопазване, базиран на блокчейн технологията – CURES Token, както и един от създателите на единствения по рода си за българския пазар крипто ексчейндж – BoneX. Основните му интереси са свързани с глобализацията, интернационализацията и децентрализацията.",
+                            ProfileImage = "david-bonev.jpg"
                         }
                     }) ;
 
@@ -53,26 +65,48 @@ namespace RightPath.Data
                 {
 
                     context.Courses.AddRange(new List<Course>()
-                        {
+                    {
                             new Course()
                             {
-                                Title = "Full Stack Developer Course",
-                                Description= "You will learn how to be full stack developer from the basics!",
+                                Title = "Курс за Full Stack Developer",
+                                Description = "Ще научите как да станете Full Stack Developer от основите!",
                                 Duration = 12.30,
-                                Logo = "lecture1.png",
-                                LectureId = 1
-
+                                Logo = "full-stack.png",
+                                LectureId = 4
                             },
                             new Course()
                             {
-                                Title = "Back End Developer Course",
-                                Description= "You will learn how to be back end developer from the basics!",
-                                Duration = 11.30,
-                                Logo = "lecture1.png",
-                                LectureId = 3
-
+                                Title = "Курс за Основи на Блокчейн Технологиите",
+                                Description = "Този курс ще обхване основите на блокчейн технологиите и техните приложения.",
+                                Duration = 10.00,
+                                Logo = "blockchain.jpg",
+                             LectureId = 3
                             },
-                        });
+                            new Course()
+                            {
+                                Title = "Курс за Стратегии и Дигитален Маркетинг",
+                                Description = "Научете ефективни стратегии за дигитален маркетинг, за да развиете онлайн присъствие и достиг.",
+                                Duration = 8.00,
+                                Logo = "digital-marketing.jpg",
+                                LectureId = 2
+                            },
+                            new Course()
+                            {
+                                Title = "Курс за Криптовалути и Децентрализирана Финансова Система",
+                                Description = "Изследвайте света на криптовалутите и децентрализираната финансова система с индустриални експерти.",
+                                Duration = 14.00,
+                                Logo = "cripto.jpg",
+                                LectureId = 5
+                            },
+                            new Course()
+                            {
+                                Title = "Менторски Курс за Личностно Развитие",
+                                Description = "Открийте потенциала си и постигнете целите си в живота и финансово планиране с помощта на Менторската Академия на Юли Тонкин.",
+                                Duration = 9.00,
+                                Logo = "personal-develop.jpg",
+                                LectureId = 1
+                            }
+                    });
 
                     context.SaveChanges();
                 }
@@ -114,40 +148,54 @@ namespace RightPath.Data
 
                 if (!context.Webminars.Any())
                 {
-
                     context.Webminars.AddRange(new List<Webminar>()
+                    {
+                        new Webminar()
                         {
-                            new Webminar()
-                            {
-                                Title = "Sofia Streets WebMinnar",
-                                Description = "You will learn about sofia underground",
-                                StartDate = new DateTime(2023, 12, 24),
-                                CityId = 1,
-                                Logo = "lecture1.png",
-                                LectureId = 3
-
-                            },
-                            new Webminar()
-                            {
-                                Title = "WebMinnar",
-                                Description = "You will learn about sofia underground",
-                                StartDate = new DateTime(2023, 12, 24),
-                                CityId = 1,
-                                Logo = "lecture1.png",
-                                LectureId = 1
-
-                            },
-                            new Webminar()
-                            {
-                                Title = "Sofia WebMinnar",
-                                Description = "You will learn about sofia underground",
-                                StartDate = new DateTime(2023, 12, 24),
-                                CityId = 1,
-                                Logo = "lecture1.png",
-                                LectureId = 1
-
-                            },
-                        });
+                            Title = "Уебминар: Въведение в Блокчейн Технологиите",
+                            Description = "Този уебминар ще ви запознае с основите на блокчейн технологиите.",
+                            StartDate = new DateTime(2024, 11, 15),
+                            CityId = 1,
+                            Logo = "blck-chain.jpg",
+                            LectureId = 3 
+                        },
+                        new Webminar()
+                        {
+                            Title = "Уебминар: Ефективни Дигитални Маркетинг Стратегии",
+                            Description = "Научете се как да разработите и приложите ефективни стратегии за дигитален маркетинг.",
+                            StartDate = new DateTime(2022, 10, 20),
+                            CityId = 1,
+                            Logo = "marketing.jpg", 
+                            LectureId = 2 
+                        },
+                        new Webminar()
+                        {
+                            Title = "Уебминар: Бъдещето на Финансовите Технологии",
+                            Description = "Изследвайте перспективите и възможностите пред финансовите технологии с водещи експерти.",
+                            StartDate = new DateTime(2023, 9, 18),
+                            CityId = 1,
+                            Logo = "finance.jpg", 
+                            LectureId = 5 
+                        },
+                        new Webminar()
+                        {
+                            Title = "Уебминар: Изграждане на Личен и Финансов успех",
+                            Description = "Открийте ключовите стратегии и практики за постигане на личен и финансов успех с Юли Тонкин.",
+                            StartDate = new DateTime(2024, 8, 25),
+                            CityId = 1,
+                            Logo = "self-confidence.jpg", 
+                            LectureId = 1 
+                        },
+                        new Webminar()
+                        {
+                            Title = "Уебминар: Бъдещето на Изкуствената Интелигентност",
+                            Description = "Присъединете се към уебминара, където ще разгледаме перспективите и предизвикателствата пред бъдещето на изкуствената интелигентност.",
+                            StartDate = new DateTime(2024, 04, 10),
+                            CityId = 1,
+                            Logo = "ai.jpg", 
+                            LectureId = 4
+                        }
+                    });
 
                     context.SaveChanges();
                 }
@@ -170,28 +218,53 @@ namespace RightPath.Data
 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-                string email = "admin@gmail.com";
-                string password = "123456";
-                string egn = "081295412";
-                string phoneNum = "08820784322";
-                string firstName = "Admin";
+                string userEmail = "user@gmail.com";
+                string userPassword = "123456";
+                string userEGN = "7589346578";
+                string userPhoneNum = "0889723131";
+                string userFirstName = "User";
 
-                if (await userManager.FindByEmailAsync(email) == null)
+                if (await userManager.FindByEmailAsync(userEmail) == null)
                 {
                     var user = new ApplicationUser
                     {
-                        FirstName = firstName,
-                        UserName = email,
-                        Email = email,
-                        EGN = egn,
-                        PhoneNumber = phoneNum,
+                        FirstName = userFirstName,
+                        UserName = userEmail,
+                        Email = userEmail,
+                        EGN = userEGN,
+                        PhoneNumber = userPhoneNum,
                     };
 
-                    var result = await userManager.CreateAsync(user, password);
+                    var result = await userManager.CreateAsync(user, userPassword);
 
                     if (result.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(user, StaticDetail.Role_Admin);
+                        await userManager.AddToRoleAsync(user, StaticDetail.Role_Customer);
+                    }
+                }
+
+                string adminEmail = "admin@gmail.com";
+                string adminPassword = "123456";
+                string adminEGN = "081295412";
+                string adminPhoneNum = "08820784322";
+                string adminFirstName = "Admin";
+
+                if (await userManager.FindByEmailAsync(adminEmail) == null)
+                {
+                    var admin = new ApplicationUser
+                    {
+                        FirstName = adminFirstName,
+                        UserName = adminEmail,
+                        Email = adminEmail,
+                        EGN = adminEGN,
+                        PhoneNumber = adminPhoneNum,
+                    };
+
+                    var result = await userManager.CreateAsync(admin, adminPassword);
+
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(admin, StaticDetail.Role_Admin);
                     }
                 }
 
