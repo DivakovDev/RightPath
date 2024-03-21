@@ -12,8 +12,8 @@ using RightPath.Data;
 namespace RightPath.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240320183127_DbInitialize")]
-    partial class DbInitialize
+    [Migration("20240321130439_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -171,13 +171,13 @@ namespace RightPath.Areas.Identity.Pages.Account
                         await _userManager.AddToRoleAsync(user, StaticDetail.Role_Customer);
                     }
 
-                    ShoppingCart shoppingCart = new ShoppingCart
-                    {
-                        ApplicationUserId = user.Id
-                    };
+                        ShoppingCart shoppingCart = new ShoppingCart
+                        {
+                            ApplicationUserId = user.Id
+                        };
 
-                    _unitOfWork.ShoppingCart.Add(shoppingCart);
-                    _unitOfWork.Save();
+                        _unitOfWork.ShoppingCart.Add(shoppingCart);
+                        _unitOfWork.Save();
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

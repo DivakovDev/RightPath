@@ -48,7 +48,7 @@ namespace RightPath
             });
             var app = builder.Build();
 
-            AppDbinitializer.SeedAsync(app);
+            AppDbinitializer.SeedAsync(app).GetAwaiter().GetResult();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

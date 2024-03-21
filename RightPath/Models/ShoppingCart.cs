@@ -7,9 +7,9 @@ namespace RightPath.Models
     {
         public int Id { get; set; }
 
-        public List<Webminar> Webminars { get; set; }
+        public List<Webminar> Webminars { get; set; } = new List<Webminar> ();
 
-        public List<Course> Courses { get; set; }
+        public List<Course> Courses { get; set; } = new List<Course>();
 
         public string ApplicationUserId{ get; set; }
         [ForeignKey("ApplicationUserId")]

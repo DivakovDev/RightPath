@@ -34,7 +34,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("CoursesId");
 
-                    b.ToTable("CourseShoppingCart");
+                    b.ToTable("CourseShoppingCart", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -261,7 +261,7 @@ namespace RightPath.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
                 });
 
             modelBuilder.Entity("RightPath.Models.Course", b =>
@@ -294,7 +294,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("RightPath.Models.Lecture", b =>
@@ -319,7 +319,7 @@ namespace RightPath.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lectures");
+                    b.ToTable("Lectures", (string)null);
                 });
 
             modelBuilder.Entity("RightPath.Models.ShoppingCart", b =>
@@ -338,7 +338,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCarts", (string)null);
                 });
 
             modelBuilder.Entity("RightPath.Models.Webminar", b =>
@@ -376,7 +376,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Webminars");
+                    b.ToTable("Webminars", (string)null);
                 });
 
             modelBuilder.Entity("ShoppingCartWebminar", b =>
@@ -391,7 +391,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("WebminarsId");
 
-                    b.ToTable("ShoppingCartWebminar");
+                    b.ToTable("ShoppingCartWebminar", (string)null);
                 });
 
             modelBuilder.Entity("CourseShoppingCart", b =>

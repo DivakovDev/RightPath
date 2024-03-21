@@ -76,6 +76,13 @@ namespace RightPath.Areas.Customer.Controllers
             Webminar webminar = _unitOfWork.Webminar.Get(c => c.Id == id);
             ShoppingCart shoppingCart = _unitOfWork.ShoppingCart.Get(y => y.ApplicationUserId == userId, "Webminars");
 
+            if(shoppingCart == null)
+            {
+                shoppingCart = new ShoppingCart() { ApplicationUserId = userId};
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+            }
+
             if (!shoppingCart.Webminars.Contains(webminar))
             {
                 shoppingCart.Webminars.Add(webminar);
@@ -102,6 +109,13 @@ namespace RightPath.Areas.Customer.Controllers
 
             Course course = _unitOfWork.Course.Get(c => c.Id == id);
             ShoppingCart shoppingCart = _unitOfWork.ShoppingCart.Get(y => y.ApplicationUserId == userId, "Courses");
+
+            if (shoppingCart == null)
+            {
+                shoppingCart = new ShoppingCart() { ApplicationUserId = userId };
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+            }
 
             if (!shoppingCart.Courses.Contains(course))
             {
