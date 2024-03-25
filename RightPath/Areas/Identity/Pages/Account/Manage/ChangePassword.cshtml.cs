@@ -74,7 +74,7 @@ namespace RightPath.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Потвърди нова парола")]
-            [Compare("Нова парола", ErrorMessage = "Новата парола и паролата за потвърждение не съвпадат.")]
+            [Compare("NewPassword", ErrorMessage = "Новата парола и паролата за потвърждение не съвпадат.")]
             public string ConfirmPassword { get; set; }
         }
 
