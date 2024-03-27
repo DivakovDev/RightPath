@@ -29,7 +29,6 @@ namespace RightPath.Data
                             Name = "Юли Тонкин",
                             Description = "Юли е предприемач, инвеститор, катализатор за промяна, стратег и автор.\r\n\r\nСъздател е на единствената по рода си Менторска Академия в България, която обхваща всички сфери на живота и всяка година служи на стотици българи да постигат и живеят целите си в личен и финансов план!",
                             ProfileImage = "yuli-tonkin.jpg"
-
                         },
                         new Lecture()
                         {
@@ -223,12 +222,14 @@ namespace RightPath.Data
                 string userEGN = "7589346578";
                 string userPhoneNum = "0889723131";
                 string userFirstName = "User";
+                string userLastName = "UserLastName";
 
                 if (await userManager.FindByEmailAsync(userEmail) == null)
                 {
                     var user = new ApplicationUser
                     {
                         FirstName = userFirstName,
+                        LastName = userLastName,
                         UserName = userEmail,
                         Email = userEmail,
                         EGN = userEGN,
@@ -248,12 +249,14 @@ namespace RightPath.Data
                 string adminEGN = "081295412";
                 string adminPhoneNum = "08820784322";
                 string adminFirstName = "Admin";
+                string adminLastName = "AdminLastName";
 
                 if (await userManager.FindByEmailAsync(adminEmail) == null)
                 {
                     var admin = new ApplicationUser
                     {
                         FirstName = adminFirstName,
+                        LastName = adminLastName,
                         UserName = adminEmail,
                         Email = adminEmail,
                         EGN = adminEGN,

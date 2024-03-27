@@ -34,7 +34,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("CoursesId");
 
-                    b.ToTable("CourseShoppingCart", (string)null);
+                    b.ToTable("CourseShoppingCart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -184,7 +184,8 @@ namespace RightPath.Migrations
 
                     b.Property<string>("EGN")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -194,6 +195,10 @@ namespace RightPath.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -261,7 +266,7 @@ namespace RightPath.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("RightPath.Models.Course", b =>
@@ -294,7 +299,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("RightPath.Models.Lecture", b =>
@@ -319,7 +324,7 @@ namespace RightPath.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lectures", (string)null);
+                    b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("RightPath.Models.ShoppingCart", b =>
@@ -338,7 +343,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("ShoppingCarts", (string)null);
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("RightPath.Models.Webminar", b =>
@@ -376,7 +381,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("Webminars", (string)null);
+                    b.ToTable("Webminars");
                 });
 
             modelBuilder.Entity("ShoppingCartWebminar", b =>
@@ -391,7 +396,7 @@ namespace RightPath.Migrations
 
                     b.HasIndex("WebminarsId");
 
-                    b.ToTable("ShoppingCartWebminar", (string)null);
+                    b.ToTable("ShoppingCartWebminar");
                 });
 
             modelBuilder.Entity("CourseShoppingCart", b =>

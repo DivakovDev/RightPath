@@ -40,18 +40,24 @@
                         <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Потвърди Паролата</label>
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
-                    @if (User.IsInRole(StaticDetail.Role_Admin)){
-                    <div class="form-group py-1 mb-3 col-md-6">
-                        <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                            <option disabled selected>--Избери Роля--</option>
-                        </select>
-                    </div>
-                    }
                     <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Иван Георгиев" />
-                        <label asp-for="Input.FirstName" class="ms-2 text-muted">Потребителско Име</label>
+                        <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Иван" />
+                        <label asp-for="Input.FirstName" class="ms-2 text-muted">Име</label>
                         <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                     </div>
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Георгиев" />
+                        <label asp-for="Input.LastName" class="ms-2 text-muted">Фамилия</label>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                    @if (User.IsInRole(StaticDetail.Role_Admin))
+                    {
+                        <div class="form-group py-1 mb-3 col-md-6">
+                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                <option disabled selected>--Избери Роля--</option>
+                            </select>
+                        </div>
+                    }
                     <div class="form-floating mb-3 col-md-6">
                         <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="+359 89 777 6799" />
                         <label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Телефонен Номер</label>

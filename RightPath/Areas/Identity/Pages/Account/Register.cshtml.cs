@@ -117,6 +117,9 @@ namespace RightPath.Areas.Identity.Pages.Account
             public string EGN { get; set; }
             public string PhoneNumber { get; set; }
             public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+
 
         }
 
@@ -155,6 +158,7 @@ namespace RightPath.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.EGN = Input.EGN;
                 user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
                 user.PhoneNumber = Input.PhoneNumber;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

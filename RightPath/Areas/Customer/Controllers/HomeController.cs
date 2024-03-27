@@ -21,7 +21,7 @@ namespace RightPath.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index(string contentType = null)
+        public IActionResult Index(string contentType = null, string LectureName = null)
         {
             var viewModel = new HomeViewModel();
 

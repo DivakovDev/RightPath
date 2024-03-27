@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RightPath.Data;
 using RightPath.Models;
+using RightPath.Repository;
+using System.Data;
 
 namespace RightPath.Areas.Admin.Controllers
 {
@@ -9,18 +13,32 @@ namespace RightPath.Areas.Admin.Controllers
     [Authorize(Roles = StaticDetail.Role_Admin)]
     public class ApplicationUserController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UnitOfWork _unitOfWork;
 
-        public ApplicationUserController(UserManager<ApplicationUser> userManager)
+        public ApplicationUserController(ApplicationDbContext  context, UserManager<ApplicationUser> userManager, UnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
+            _context = context;
             _userManager = userManager;
         }
 
         // GET: User
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var users = _userManager.Users.ToList();
-            return View(users);
+            var users = await _context.ApplicationUsers.ToListAsync();
+            var displayUsers = new List<ApplicationUser>();
+
+            foreach (var user in users)
+            {
+                if (await _userManager.IsInRoleAsync(user, StaticDetail.Role_Lecture) || await _userManager.IsInRoleAsync(user, StaticDetail.Role_Customer))
+                {
+                    displayUsers.Add(user);
+                }
+            }
+
+            return View(displayUsers);
         }
 
         // GET: User/Edit/5
@@ -86,10 +104,16 @@ namespace RightPath.Areas.Admin.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> Delete(string id)
+        public IActionResult Delete(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
-            await _userManager.DeleteAsync(user);
+            ApplicationUser user = _unitOfWork.ApplicationUser.Get(u => u.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.ApplicationUser.Remove(user);
+            _unitOfWork.Save();
+            TempData["success"] = "Потребителят е изтрит успешно!";
             return RedirectToAction("Index");
         }
     }
