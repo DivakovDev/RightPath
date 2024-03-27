@@ -18,7 +18,7 @@
                         <small>Обратно в Началото</small>
                     </a>
                 </div>
-                @if (User.IsInRole("Потребител"))
+                @if (User.IsInRole(StaticDetail.Role_Customer) || User.IsInRole(StaticDetail.Role_Lecture))
                 {
                     <div class="col-6 col-md-2">
                         <button type="submit" class="btn btn-success mb-5 fw-semibold btn-sm text-uppercase">
@@ -26,7 +26,7 @@
                         </button>
                     </div>
                 }
-                else
+                else if(!User.IsInRole(StaticDetail.Role_Admin))
                 {
                     <div class="col-6 col-md-2">
                         <button type="submit" class="btn btn-success mb-5 fw-semibold btn-sm text-uppercase">

@@ -87,18 +87,18 @@ namespace RightPath.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    courseVM.Course.Logo = @"\images\products\" + fileName;
+                    courseVM.Course.Logo = fileName;
                 }
 
                 if (courseVM.Course.Id == 0)
                 {
                     _unitOfWork.Course.Add(courseVM.Course);
-                    TempData["success"] = "Уебминара е създаден успешно!";
+                    TempData["success"] = "Курсът е създаден успешно!";
                 }
                 else
                 {
                     _unitOfWork.Course.Update(courseVM.Course);
-                    TempData["success"] = "Уебминара е редактиран успешно!";
+                    TempData["success"] = "Курсът е редактиран успешно!";
                 }
                 _unitOfWork.Save();
                 return RedirectToAction("Index");

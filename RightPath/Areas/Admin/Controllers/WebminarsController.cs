@@ -70,6 +70,22 @@ namespace RightPath.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (webminarVM.Webminar.StartDate < DateTime.Today)
+                {
+                    ModelState.AddModelError("Webminar.StartDate", "Датата на Уебминара не може да бъде в Миналото!");
+                    webminarVM.CityList = _unitOfWork.City.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id.ToString()
+                    });
+                    webminarVM.LectureList = _unitOfWork.Lecture.GetAll().Select(y => new SelectListItem
+                    {
+                        Text = y.Name,
+                        Value = y.Id.ToString()
+                    });
+                    return View(webminarVM);
+                }
+
                 string wwwRoothPath = _webHostEnvironment.WebRootPath;
                 if(file != null)
                 {
@@ -92,7 +108,7 @@ namespace RightPath.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    webminarVM.Webminar.Logo = @"\images\products\" + fileName;
+                    webminarVM.Webminar.Logo = fileName;
                 }
 
                 if(webminarVM.Webminar.Id == 0)
@@ -108,7 +124,17 @@ namespace RightPath.Areas.Admin.Controllers
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            return View();
+            webminarVM.CityList = _unitOfWork.City.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+            webminarVM.LectureList = _unitOfWork.Lecture.GetAll().Select(y => new SelectListItem
+            {
+                Text = y.Name,
+                Value = y.Id.ToString()
+            });
+            return View(webminarVM);
 
         }
 
