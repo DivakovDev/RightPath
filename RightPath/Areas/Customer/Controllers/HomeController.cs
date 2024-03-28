@@ -21,41 +21,74 @@ namespace RightPath.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index(string contentType = null, string LectureName = null)
+        public IActionResult Index(string contentType = null, string LectureName = null, int? lectorId = null)
         {
             var viewModel = new HomeViewModel();
+            viewModel.Lectures = _unitOfWork.Lecture.GetAll();
 
             if (contentType == "Webminars")
             {
-                viewModel.Webminars = GetWebminars();
+                viewModel.Webminars = GetWebminars(lectorId);
                 ViewBag.ContentType = "Webminars";
             }
             else if (contentType == "Courses")
             {
-                viewModel.Courses = GetCourses();
+                viewModel.Courses = GetCourses(lectorId);
                 ViewBag.ContentType = "Courses";
             }
             else
             {
-                viewModel.Webminars = GetWebminars();
-                viewModel.Courses = GetCourses();
+                viewModel.Webminars = GetWebminars(lectorId);
+                viewModel.Courses = GetCourses(lectorId);
                 ViewBag.ContentType = "All";
             }
 
             return View(viewModel);
         }
 
-
-
-        private IEnumerable<Webminar> GetWebminars()
+       /* [HttpGet]
+        public IActionResult SearchByLecture(int? lectureId)
         {
+            var viewModel = new HomeViewModel();
+
+            // If lectureId is provided, filter courses and webinars by lecture
+            if (lectureId.HasValue)
+            {
+                viewModel.Courses = GetCoursesByLecture(lectureId.Value);
+                viewModel.Webminars = GetWebminarsByLecture(lectureId.Value);
+            }
+            else
+            {
+                // If no lectureId is provided, get all courses and webinars
+                viewModel.Courses = GetCourses();
+                viewModel.Webminars = GetWebminars();
+            }
+
+            return View(viewModel);
+        }*/
+
+        private IEnumerable<Webminar> GetWebminars(int? lectorId)
+        {
+
+
             IEnumerable<Webminar> webminarList = _unitOfWork.Webminar.GetAll(includeProperties: "City,Lecture");
+            
+            if(lectorId != null)
+            {
+                webminarList = webminarList.Where(w => w.LectureId == lectorId);
+            }
+
             return (webminarList);
         }
 
-        private IEnumerable<Course> GetCourses()
+        private IEnumerable<Course> GetCourses(int? lectorId)
         {
             IEnumerable<Course> courseList = _unitOfWork.Course.GetAll(includeProperties: "Lecture");
+
+            if (lectorId != null)
+            {
+                courseList = courseList.Where(w => w.LectureId == lectorId);
+            }
             return (courseList);
         }
 
