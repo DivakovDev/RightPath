@@ -28,29 +28,31 @@
                 <input type="hidden" name="contentType" value="Courses" />
                 <button type="submit" class="btn btn-dark bg-gradient border-0 rounded">Курсове</button>
             </form>
-
-            <form asp-action="Index" method="post" class="col-1 mb-3 w-auto">
-                <input type="hidden" name="contentType" value="All" />
-                <button type="submit" class="btn btn-dark bg-gradient border-0 rounded">Покажи Всички</button>
-            </form>
-
-           
+            @if (User.IsInRole(StaticDetail.Role_Customer) || User.IsInRole(StaticDetail.Role_Admin) || User.IsInRole(StaticDetail.Role_Lecture))
+            {
+                <form asp-action="Index" method="post" class="col-1 mb-3 w-auto">
+                    <input type="hidden" name="contentType" value="All" />
+                    <button type="submit" class="btn btn-dark bg-gradient border-0 rounded">Покажи Всички</button>
+                </form>
+            }
         </div>
 
-        <div class="row col-3" style="margin-left:75px;">
-            <div class="dropdown">
-                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Сортирай по име на Лектор
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    @foreach(var lecture in Model.Lectures)
-                    {
-                        <li><a class="dropdown-item" asp-action="Index" asp-route-lectorId="@lecture.Id">@lecture.Name</a></li>
-                    }
-                </ul>
+        @if (User.IsInRole(StaticDetail.Role_Customer) || User.IsInRole(StaticDetail.Role_Admin) || User.IsInRole(StaticDetail.Role_Lecture))
+        {
+            <div class="row col-3" style="margin-left:75px;">
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Търси по име на Лектор
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach(var lecture in Model.Lectures)
+                        {
+                            <li><a class="dropdown-item" asp-action="Index" asp-route-lectorId="@lecture.Id">@lecture.Name</a></li>
+                        }
+                    </ul>
+                </div>
             </div>
-        </div>
-
+        }
     </div>
     <div class="row pb-3">
         <h3 class="mt-3">Уебминари</h3>

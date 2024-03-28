@@ -38,6 +38,7 @@ namespace RightPath.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [TempData]
+        [Display(Name = "Промяната е успешна")]
         public string StatusMessage { get; set; }
 
         /// <summary>
