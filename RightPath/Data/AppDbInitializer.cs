@@ -83,6 +83,14 @@ namespace RightPath.Data
                             },
                             new Course()
                             {
+                                Title = "Курс за Комуникации и Личностно Развитие",
+                                Description = "Открийте потенциала си в областта на комуникациите и личностното развитие с помощта на Менторската Академия на Юли Тонкин.",
+                                Duration = 9.00,
+                                Logo = "personal-develop1.jpg",
+                                LectureId = 1
+                            },
+                            new Course()
+                            {
                                 Title = "Курс за Стратегии и Дигитален Маркетинг",
                                 Description = "Научете ефективни стратегии за дигитален маркетинг, за да развиете онлайн присъствие и достиг.",
                                 Duration = 8.00,
@@ -149,6 +157,15 @@ namespace RightPath.Data
                 {
                     context.Webminars.AddRange(new List<Webminar>()
                     {
+                        new Webminar()
+                        {
+                            Title = "Уебминар: Крипто майнинг и крипто валути",
+                            Description = "Изследвайте перспективите и възможностите пред крипто майнинга и крипто валутите с водещи експерти.",
+                            StartDate = new DateTime(2023, 9, 18),
+                            CityId = 3,
+                            Logo = "crypto_mining.jpg",
+                            LectureId = 5
+                        },
                         new Webminar()
                         {
                             Title = "Уебминар: Въведение в Блокчейн Технологиите",

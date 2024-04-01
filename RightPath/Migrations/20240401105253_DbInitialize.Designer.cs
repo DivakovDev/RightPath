@@ -12,7 +12,7 @@ using RightPath.Data;
 namespace RightPath.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240327153409_DbInitialize")]
+    [Migration("20240401105253_DbInitialize")]
     partial class DbInitialize
     {
         /// <inheritdoc />
