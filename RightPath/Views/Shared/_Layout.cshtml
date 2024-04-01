@@ -49,6 +49,11 @@
                                 </ul>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="ForUs" asp-action="Index">
+                                За Нас
+                            </a>
+                        </li>
                         @if (User.IsInRole(StaticDetail.Role_Customer))
                         {
                             <li class="nav-item">
